@@ -1,5 +1,6 @@
 import { HomeIcon } from "@primer/octicons-react";
 import Link from "next/link";
+import { ActiveLink } from "./ActiveLink";
 
 export const Navigation = () => {
   const navItems = [
@@ -18,9 +19,7 @@ export const Navigation = () => {
           </Link>
           <div className="flex gap-2 items-center">
             {navItems.map((item, idx) => (
-              <Link href={item.path} key={idx}>
-                {item.name}
-              </Link>
+              <ActiveLink key={idx} {...item} />
             ))}
           </div>
         </div>
