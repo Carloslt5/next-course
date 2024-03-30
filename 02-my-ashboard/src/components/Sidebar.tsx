@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { IoBrowsersOutline, IoBug, IoCalculator, IoLogoReact } from "react-icons/io5";
+import { IoBrowsersOutline, IoBug, IoCalculator, IoHeart, IoLogoReact } from "react-icons/io5";
 import { SidebarMenuItem } from "./SidebarMenuItem";
 
 const menuItems = [
@@ -21,6 +21,12 @@ const menuItems = [
     title: "Pokemons",
     subTitle: "Pokemons List",
   },
+  {
+    path: "/dashboard/favourites",
+    icon: <IoHeart size={20} />,
+    title: "My Favourites",
+    subTitle: "Global State",
+  },
 ];
 
 export const Sidebar = () => {
@@ -31,7 +37,6 @@ export const Sidebar = () => {
           <IoLogoReact />
           <span>Dash</span>
         </h1>
-        <p className="text-slate-500 text-sm">Manage your actions and activities</p>
       </div>
       <div id="profile" className="px-6 py-10">
         <p className="text-slate-500">Welcome back,</p>
