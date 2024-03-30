@@ -1,25 +1,31 @@
 import Image from "next/image";
-import { IoBrowsersOutline, IoCalculator, IoLogoReact } from "react-icons/io5";
+import { IoBrowsersOutline, IoBug, IoCalculator, IoLogoReact } from "react-icons/io5";
 import { SidebarMenuItem } from "./SidebarMenuItem";
 
 const menuItems = [
   {
     path: "/dashboard/main",
-    icon: <IoBrowsersOutline size={40} />,
+    icon: <IoBrowsersOutline size={20} />,
     title: "Dashboard",
     subTitle: "Data Overview",
   },
   {
     path: "/dashboard/counter",
-    icon: <IoCalculator size={40} />,
+    icon: <IoCalculator size={20} />,
     title: "Counter",
     subTitle: "Counter Client Side",
+  },
+  {
+    path: "/dashboard/pokemons",
+    icon: <IoBug size={20} />,
+    title: "Pokemons",
+    subTitle: "Pokemons List",
   },
 ];
 
 export const Sidebar = () => {
   return (
-    <div id="menu" className="bg-gray-900 min-h-screen z-10 text-slate-300 w-64 left-0 h-screen">
+    <div id="menu" className="bg-gray-900 min-h-screen z-10 text-slate-300 w-64 left-0 ">
       <div id="logo" className="my-4 px-6">
         <h1 className="text-lg md:text-2xl font-bold text-white flex items-center gap-2">
           <IoLogoReact />
