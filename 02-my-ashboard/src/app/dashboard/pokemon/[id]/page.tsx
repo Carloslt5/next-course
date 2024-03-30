@@ -1,6 +1,7 @@
 import { PokemonDetails } from "@/types/PokemonDetails.type";
 import { Metadata } from "next";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
 type PokemonPageProps = {
   params: { id: string };
@@ -8,7 +9,6 @@ type PokemonPageProps = {
 
 export async function generateMetadata({ params }: PokemonPageProps): Promise<Metadata> {
   const { id, name } = await getPokemon(params.id);
-
   return {
     title: `#${id} - ${name}`,
     description: `Pokemon page - ${name}`,
@@ -16,11 +16,14 @@ export async function generateMetadata({ params }: PokemonPageProps): Promise<Me
 }
 
 const getPokemon = async (id: string): Promise<PokemonDetails> => {
-  const data: PokemonDetails = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then((res) =>
-    res.json()
-  );
-  console.log("🚀 --------- data", data);
-  return data;
+  try {
+    const data: PokemonDetails = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then(
+      (res) => res.json()
+    );
+    return data;
+  } catch (error) {
+    notFound();
+  }
 };
 
 export default async function PokemonPage({ params }: PokemonPageProps) {
