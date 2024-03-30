@@ -7,6 +7,13 @@ type PokemonPageProps = {
   params: { id: string };
 };
 
+export async function generateStaticParams() {
+  const static151Pokemons = Array.from({ length: 20 }).map((x, i) => `${i + 1}`);
+  return static151Pokemons.map((id) => ({
+    id: id,
+  }));
+}
+
 export async function generateMetadata({ params }: PokemonPageProps): Promise<Metadata> {
   const { id, name } = await getPokemon(params.id);
   return {
