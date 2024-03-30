@@ -1,6 +1,11 @@
 import { PokemonGrid } from "@/components/PokemonGrid";
 import { Pokemon, PokemonResponse } from "@/types/Pokemons.type";
 
+export const metadata = {
+  title: "Pokemon list",
+  description: "All pokemons",
+};
+
 const getPokemons = async (limit = 100, offset = 0): Promise<Pokemon[]> => {
   const data: PokemonResponse = await fetch(
     `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`
