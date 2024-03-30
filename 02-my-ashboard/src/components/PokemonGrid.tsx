@@ -7,7 +7,7 @@ type PokemonGridProps = {
 
 export const PokemonGrid = ({ pokemons }: PokemonGridProps) => {
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-3 gap-1">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
       {pokemons.map((pokemon) => (
         <PokemonCard key={pokemon.id} pokemon={pokemon} />
       ))}
