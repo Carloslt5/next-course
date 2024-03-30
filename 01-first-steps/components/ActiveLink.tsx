@@ -9,7 +9,6 @@ type ActiveLinkProps = {
 
 export const ActiveLink = ({ path, name }: ActiveLinkProps) => {
   const pathName = usePathname();
-  console.log("🚀 --------- pathName", pathName);
 
   return (
     <>
