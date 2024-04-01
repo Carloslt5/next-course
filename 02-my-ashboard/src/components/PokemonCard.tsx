@@ -1,5 +1,6 @@
 "use client";
-import { useAppSelector } from "@/stores";
+import { useAppDispatch, useAppSelector } from "@/stores";
+import { toggleFavourite } from "@/stores/pokemons/pokemons";
 import { Pokemon } from "@/types/Pokemons.type";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,6 +12,11 @@ type PokemonCardrops = {
 
 export const PokemonCard = ({ pokemon }: PokemonCardrops) => {
   const isFavourite = useAppSelector((state) => !!state.pokemons[pokemon.id]);
+  const dispach = useAppDispatch();
+
+  const handleFavourite = () => {
+    dispach(toggleFavourite(pokemon));
+  };
 
   return (
     <div className="mx-auto right-0 mt-2 w-full">
@@ -35,7 +41,7 @@ export const PokemonCard = ({ pokemon }: PokemonCardrops) => {
           </div>
         </div>
         <div className="border-b px-4 py-2 hover:bg-gray-100 flex">
-          <Link href="/dashboard/main" className=" flex items-center">
+          <div className=" flex items-center cursor-pointer" onClick={handleFavourite}>
             <div className="text-red-500">{isFavourite ? <IoHeart /> : <IoHeartOutline />}</div>
             <div className="pl-3">
               <p className="text-sm font-medium text-gray-800 leading-none">
@@ -43,7 +49,7 @@ export const PokemonCard = ({ pokemon }: PokemonCardrops) => {
               </p>
               <p className="text-xs text-gray-500">Click to add favourite</p>
             </div>
-          </Link>
+          </div>
         </div>
       </div>
     </div>
