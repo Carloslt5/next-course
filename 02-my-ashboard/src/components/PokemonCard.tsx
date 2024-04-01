@@ -1,13 +1,17 @@
+"use client";
+import { useAppSelector } from "@/stores";
 import { Pokemon } from "@/types/Pokemons.type";
 import Image from "next/image";
 import Link from "next/link";
-import { IoHeartOutline } from "react-icons/io5";
+import { IoHeart, IoHeartOutline } from "react-icons/io5";
 
 type PokemonCardrops = {
   pokemon: Pokemon;
 };
 
 export const PokemonCard = ({ pokemon }: PokemonCardrops) => {
+  const isFavourite = useAppSelector((state) => !!state.pokemons[pokemon.id]);
+
   return (
     <div className="mx-auto right-0 mt-2 w-full">
       <div className="bg-white rounded overflow-hidden shadow-lg">
@@ -32,12 +36,12 @@ export const PokemonCard = ({ pokemon }: PokemonCardrops) => {
         </div>
         <div className="border-b px-4 py-2 hover:bg-gray-100 flex">
           <Link href="/dashboard/main" className=" flex items-center">
-            <div className="text-red-500">
-              <IoHeartOutline />
-            </div>
+            <div className="text-red-500">{isFavourite ? <IoHeart /> : <IoHeartOutline />}</div>
             <div className="pl-3">
-              <p className="text-sm font-medium text-gray-800 leading-none">Not favourite</p>
-              <p className="text-xs text-gray-500">View your campaigns</p>
+              <p className="text-sm font-medium text-gray-800 leading-none">
+                {isFavourite ? "Favourite" : "Not favourite"}
+              </p>
+              <p className="text-xs text-gray-500">Click to add favourite</p>
             </div>
           </Link>
         </div>
