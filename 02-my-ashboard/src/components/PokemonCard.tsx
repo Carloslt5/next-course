@@ -11,7 +11,7 @@ type PokemonCardrops = {
 };
 
 export const PokemonCard = ({ pokemon }: PokemonCardrops) => {
-  const isFavourite = useAppSelector((state) => !!state.pokemons[pokemon.id]);
+  const isFavourite = useAppSelector((state) => !!state.pokemons.favourites[pokemon.id]);
   const dispach = useAppDispatch();
 
   const handleFavourite = () => {
