@@ -10,7 +10,9 @@ docker-compose up -d
 
 2. Config .env with postgres connect
 
-3. Prisma commands
+3. Executed SEED, [generate local data base](http://localhost:3000/api/api/seed)
+
+## Prisma commands
 
 ```
 npx prisma init
