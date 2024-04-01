@@ -6,9 +6,9 @@ type PokemonsState = {
 };
 
 const initialState: PokemonsState = {
-  "1": { id: "1", name: "bulbassaur" },
-  "3": { id: "3", name: "venusaur" },
-  "6": { id: "6", name: "charizard" },
+  // "1": { id: "1", name: "bulbassaur" },
+  // "3": { id: "3", name: "venusaur" },
+  // "6": { id: "6", name: "charizard" },
 };
 
 const pokemonsSlice = createSlice({
