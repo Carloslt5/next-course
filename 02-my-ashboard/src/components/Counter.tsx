@@ -8,13 +8,24 @@ type CounterProps = {
   value?: number;
 };
 
+const getApiCounter = async () => {
+  const data = await fetch("/api/counter").then((res) => res.json());
+  return data;
+};
+
 export const Counter = ({ value = 0 }: CounterProps) => {
   const count = useAppSelector((state) => state.counter.count);
   const dispatch = useDispatch();
 
+  //init value global storage
+  // useEffect(() => {
+  //   dispatch(initCounterState(value));
+  // }, [dispatch, value]);
+
+  //get init value API - global storage
   useEffect(() => {
-    dispatch(initCounterState(value));
-  }, [dispatch, value]);
+    getApiCounter().then(({ count }) => dispatch(initCounterState(count)));
+  }, [dispatch]);
 
   return (
     <>
