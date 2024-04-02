@@ -1,3 +1,4 @@
+import { NewTodo } from "@/components/NewTodo";
 import { TodoGrid } from "@/components/TodoGrid";
 import prisma from "@/libs/prisma";
 
@@ -11,6 +12,9 @@ export default async function RestTodosPage() {
 
   return (
     <>
+      <div className="mb-5">
+        <NewTodo />
+      </div>
       <TodoGrid todos={todos} />
     </>
   );

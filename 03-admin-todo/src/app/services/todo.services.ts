@@ -1,12 +1,27 @@
 import { Todo } from "@prisma/client";
 
-const baseURL = "http://localhost:3000/api";
-
 class TodoServices {
+  private baseURL: string;
+
+  constructor() {
+    this.baseURL = "http://localhost:3000/api";
+  }
   async updateTodos(id: string, complete: boolean): Promise<Todo> {
     const body = { complete };
-    const todo = await fetch(`${baseURL}/todos/${id}`, {
+    const todo = await fetch(`${this.baseURL}/todos/${id}`, {
       method: "PUT",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => res.json());
+    return todo;
+  }
+
+  async createTodo(description: string): Promise<Todo> {
+    const body = { description };
+    const todo = await fetch(`${this.baseURL}/todos`, {
+      method: "POST",
       body: JSON.stringify(body),
       headers: {
         "Content-Type": "application/json",
