@@ -21,7 +21,14 @@ npm install
 npm run dev
 ```
 
-5. Executed SEED, [generate local data base](http://localhost:3000/api/api/seed)
+5. Init prisma migrate db local
+
+```
+npx prisma migrate dev
+npx prisma generate
+```
+
+6. Executed SEED, [generate local data base](http://localhost:3000/api/api/seed)
 
 ## Prisma commands
 
