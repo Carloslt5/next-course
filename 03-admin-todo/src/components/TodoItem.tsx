@@ -3,9 +3,10 @@ import { IoCheckboxOutline, IoSquareOutline } from "react-icons/io5";
 
 type TodoItemProps = {
   todo: Todo;
+  toggleTodo: (id: string, complete: boolean) => void;
 };
 
-export const TodoItem = ({ todo }: TodoItemProps) => {
+export const TodoItem = ({ todo, toggleTodo }: TodoItemProps) => {
   return (
     <>
       <div className={todo.complete ? "todoDone" : "todoPending"}>
@@ -13,6 +14,7 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
           <div
             className={`flex p-2 rounded-md cursor-pointer hover:bg-opacity-60 bg-blue-100
           ${todo.complete ? "bg-blue-100" : "bg-red-100"}`}
+            onClick={() => toggleTodo(todo.id, !todo.complete)}
           >
             {todo.complete ? <IoCheckboxOutline size={30} /> : <IoSquareOutline size={30} />}
           </div>
