@@ -9,8 +9,19 @@ docker-compose up -d
 ```
 
 2. Config .env with postgres connect
+3. Install dependencies
 
-3. Executed SEED, [generate local data base](http://localhost:3000/api/api/seed)
+```
+npm install
+```
+
+4. Init server, development
+
+```
+npm run dev
+```
+
+5. Executed SEED, [generate local data base](http://localhost:3000/api/api/seed)
 
 ## Prisma commands
 
