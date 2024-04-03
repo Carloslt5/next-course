@@ -1,7 +1,6 @@
 "use client";
 
-import { addTodo } from "@/actions/todo-actions";
-import todoServices from "@/services/todo.services";
+import { addTodo, deleteTodo } from "@/actions/todo-actions";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { IoTrashOutline } from "react-icons/io5";
@@ -18,17 +17,20 @@ export const NewTodo = () => {
   //   setDescription("");
   //   route.refresh();
   // };
-
-  const handleDeleteCompete = async () => {
-    await todoServices.deletedCompleteTodo();
-    route.refresh();
-  };
+  // const handleDeleteCompete = async () => {
+  //   await todoServices.deletedCompleteTodo();
+  //   route.refresh();
+  // };
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (description.trim().length === 0) return;
     await addTodo(description);
     setDescription("");
+  };
+
+  const handleDeleteCompete = async () => {
+    await deleteTodo();
   };
 
   return (

@@ -29,3 +29,13 @@ export const addTodo = async (description: string) => {
     return { message: "Todo not created" };
   }
 };
+
+export const deleteTodo = async () => {
+  try {
+    const deletedTodo = await prisma.todo.deleteMany({ where: { complete: true } });
+    revalidatePath("/dashboard/server-actions");
+    return deletedTodo;
+  } catch (error) {
+    return { message: "Todo not deleted" };
+  }
+};
