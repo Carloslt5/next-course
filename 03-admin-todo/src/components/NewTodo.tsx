@@ -1,5 +1,6 @@
 "use client";
 
+import { addTodo } from "@/actions/todo-actions";
 import todoServices from "@/services/todo.services";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
@@ -8,17 +9,26 @@ import { IoTrashOutline } from "react-icons/io5";
 export const NewTodo = () => {
   const [description, setDescription] = useState("");
   const route = useRouter();
-  const onSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    if (description.trim().length === 0) return;
-    await todoServices.createTodo(description);
-    setDescription("");
-    route.refresh();
-  };
+
+  // RestAPI
+  // const onSubmit = async (e: FormEvent) => {
+  //   e.preventDefault();
+  //   if (description.trim().length === 0) return;
+  //   await todoServices.createTodo(description);
+  //   setDescription("");
+  //   route.refresh();
+  // };
 
   const handleDeleteCompete = async () => {
     await todoServices.deletedCompleteTodo();
     route.refresh();
+  };
+
+  const onSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (description.trim().length === 0) return;
+    await addTodo(description);
+    setDescription("");
   };
 
   return (
