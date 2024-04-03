@@ -29,6 +29,16 @@ class TodoServices {
     }).then((res) => res.json());
     return todo;
   }
+
+  async deletedCompleteTodo(): Promise<boolean> {
+    const todo = await fetch(`${this.baseURL}/todos`, {
+      method: "Delete",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => res.json());
+    return true;
+  }
 }
 
 const todoServices = new TodoServices();

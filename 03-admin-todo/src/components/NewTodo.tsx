@@ -16,6 +16,11 @@ export const NewTodo = () => {
     route.refresh();
   };
 
+  const handleDeleteCompete = async () => {
+    await todoServices.deletedCompleteTodo();
+    route.refresh();
+  };
+
   return (
     <form onSubmit={onSubmit} className="flex ">
       <input
@@ -34,12 +39,12 @@ export const NewTodo = () => {
       </button>
 
       <button
-        //TODO: onClick={ () => deleteCompleted() }
+        onClick={handleDeleteCompete}
         type="button"
         className="flex ml-auto items-center justify-center rounded  bg-red-400 p-2 text-white hover:bg-red-700 transition-all"
       >
         <IoTrashOutline />
-        Delete
+        Delete completed
       </button>
     </form>
   );
