@@ -1,5 +1,5 @@
 "use client";
-import todoServices from "@/app/services/todo.services";
+import todoServices from "@/services/todo.services";
 import { Todo } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { TodoItem } from "./TodoItem";

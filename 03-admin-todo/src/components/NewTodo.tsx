@@ -1,6 +1,6 @@
 "use client";
 
-import todoServices from "@/app/services/todo.services";
+import todoServices from "@/services/todo.services";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { IoTrashOutline } from "react-icons/io5";

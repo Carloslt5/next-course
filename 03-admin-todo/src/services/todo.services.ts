@@ -1,5 +1,13 @@
 import { Todo } from "@prisma/client";
 
+const sleep = (seconds: number = 1): Promise<boolean> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(true);
+    }, seconds * 1000);
+  });
+};
+
 class TodoServices {
   private baseURL: string;
 
@@ -7,6 +15,7 @@ class TodoServices {
     this.baseURL = "http://localhost:3000/api";
   }
   async updateTodos(id: string, complete: boolean): Promise<Todo> {
+    await sleep(2);
     const body = { complete };
     const todo = await fetch(`${this.baseURL}/todos/${id}`, {
       method: "PUT",
