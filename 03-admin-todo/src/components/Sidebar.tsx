@@ -1,7 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CiLogout } from "react-icons/ci";
-import { IoBrowsersOutline, IoCheckboxOutline, IoFlashSharp, IoListOutline } from "react-icons/io5";
+import {
+  IoBasketOutline,
+  IoBrowsersOutline,
+  IoCheckboxOutline,
+  IoFlashSharp,
+  IoListOutline,
+} from "react-icons/io5";
 import { SidebarItem } from "./SidebarItem";
 
 const menuItems = [
@@ -24,6 +30,11 @@ const menuItems = [
     icon: <IoFlashSharp size={20} />,
     path: "/dashboard/cookies",
     title: "Cookies",
+  },
+  {
+    icon: <IoBasketOutline size={20} />,
+    path: "/dashboard/products",
+    title: "Products",
   },
 ];
 
