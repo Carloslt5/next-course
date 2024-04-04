@@ -10,7 +10,6 @@ type TabBarProps = {
 
 export const TabBar = ({ currentTab = 1, tabOptions = [1, 2, 3, 4] }: TabBarProps) => {
   const [selected, setSelected] = useState(currentTab);
-
   const onTabSelected = (tab: number) => {
     setSelected(tab);
     setCookie("selected-tab", tab.toString());
@@ -18,7 +17,7 @@ export const TabBar = ({ currentTab = 1, tabOptions = [1, 2, 3, 4] }: TabBarProp
 
   return (
     <div
-      className={`grid w-full md:w-1/2 transition-all space-x-2 rounded-xl bg-zinc-100 p-2
+      className={`grid w-full md:w-1/2 rounded-xl bg-zinc-100 p-2
       ${"grid-cols-" + tabOptions.length}`}
     >
       {tabOptions.map((tab) => (
