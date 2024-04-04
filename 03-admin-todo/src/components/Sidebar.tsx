@@ -43,9 +43,10 @@ export const Sidebar = () => {
     <aside className="ml-[-100%] fixed z-10 top-0 pb-3 px-6 w-full flex flex-col justify-between h-screen border-r bg-white transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
       <div>
         <div className="-mx-6 px-6 py-4">
-          <Link href="dashboard" title="home">
+          <Link href="/dashboard" title="home">
             <Image
               src="https://tailus.io/sources/blocks/stats-cards/preview/images/logo.svg"
+              className="w-32"
               alt="tailus logo"
               width={150}
               height={150}
@@ -57,10 +58,9 @@ export const Sidebar = () => {
           <Image
             src="https://tailus.io/sources/blocks/stats-cards/preview/images/second_user.webp"
             alt=""
-            className=" m-auto rounded-full object-cover"
+            className="m-auto rounded-full object-cover"
             width={120}
             height={120}
-            priority
           />
           <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">
             Cynthia J. Watts
