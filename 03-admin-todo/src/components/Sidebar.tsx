@@ -49,6 +49,7 @@ export const Sidebar = () => {
             className=" m-auto rounded-full object-cover"
             width={120}
             height={120}
+            priority
           />
           <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">
             Cynthia J. Watts
