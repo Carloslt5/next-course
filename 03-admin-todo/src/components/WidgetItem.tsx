@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
 
 type WidgetItemProps = {
-  title: string;
-  children: ReactNode;
+  title?: string;
+  children?: ReactNode;
 };
 
 export const WidgetItem = ({ title, children }: WidgetItemProps) => {
