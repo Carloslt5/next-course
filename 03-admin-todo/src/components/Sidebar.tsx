@@ -78,7 +78,9 @@ export const Sidebar = async () => {
           <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">
             {session?.user?.name ?? "No Name"}
           </h5>
-          <span className="hidden text-gray-400 lg:block">Admin</span>
+          <span className="hidden text-gray-400 lg:block capitalize">
+            {session?.user?.roles?.join(", ") ?? ["client"]}
+          </span>
         </div>
 
         <ul className="space-y-2 tracking-wide mt-8">
