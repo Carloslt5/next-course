@@ -1,3 +1,5 @@
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import { CiLogout } from "react-icons/ci";
@@ -7,6 +9,7 @@ import {
   IoCheckboxOutline,
   IoFlashSharp,
   IoListOutline,
+  IoPersonOutline,
 } from "react-icons/io5";
 import { SidebarItem } from "./SidebarItem";
 
@@ -36,9 +39,16 @@ const menuItems = [
     path: "/dashboard/products",
     title: "Products",
   },
+  {
+    icon: <IoPersonOutline size={20} />,
+    path: "/dashboard/profile",
+    title: "Profile",
+  },
 ];
 
-export const Sidebar = () => {
+export const Sidebar = async () => {
+  const session = await getServerSession(authOptions);
+
   return (
     <aside className="ml-[-100%] fixed z-10 top-0 pb-3 px-6 w-full flex flex-col justify-between h-screen border-r bg-white transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
       <div>
@@ -56,14 +66,17 @@ export const Sidebar = () => {
 
         <div className="mt-8 text-center">
           <Image
-            src="https://tailus.io/sources/blocks/stats-cards/preview/images/second_user.webp"
-            alt=""
+            src={
+              session?.user?.image ??
+              "https://tailus.io/sources/blocks/stats-cards/preview/images/second_user.webp"
+            }
+            alt={`Profile image ${session?.user?.name}`}
             className="m-auto rounded-full object-cover"
             width={120}
             height={120}
           />
           <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">
-            Cynthia J. Watts
+            {session?.user?.name ?? "No Name"}
           </h5>
           <span className="hidden text-gray-400 lg:block">Admin</span>
         </div>
