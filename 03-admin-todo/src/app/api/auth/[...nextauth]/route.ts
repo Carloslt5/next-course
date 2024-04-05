@@ -1,7 +1,9 @@
+import { signInEmailPassword } from "@/actions/auth-actions";
 import prisma from "@/libs/prisma";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import { Adapter } from "next-auth/adapters";
+import CredentialsProvider from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 
@@ -16,6 +18,20 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GITHUB_ID ?? "",
       clientSecret: process.env.GITHUB_SECRET ?? "",
     }),
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "text", placeholder: "usuario@email.com" },
+        password: { label: "Password", type: "password", placeholder: "******" },
+      },
+      async authorize(credentials, req) {
+        const user = await signInEmailPassword(credentials!.email, credentials!.password);
+
+        if (user) return user;
+
+        return null;
+      },
+    }),
   ],
   session: {
     strategy: "jwt",
@@ -27,8 +43,7 @@ export const authOptions: NextAuthOptions = {
 
     async jwt({ token, user, account, profile }) {
       const dbUser = await prisma.user.findUnique({ where: { email: token.email ?? "no-email" } });
-
-      if (!dbUser?.isActive) {
+      if (dbUser?.isActive === false) {
         throw Error("User not active");
       }
 

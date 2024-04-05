@@ -4,7 +4,7 @@ import { DefaultUser } from "next-auth";
 interface IUser extends DefaultUser {
   // Users Roles
   roles?: string[];
-  isActived: boolean;
+  isActive: boolean;
 }
 
 declare module "next-auth" {
