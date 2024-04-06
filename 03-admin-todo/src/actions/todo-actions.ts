@@ -3,6 +3,7 @@
 import prisma from "@/libs/prisma";
 import { Todo } from "@prisma/client";
 import { revalidatePath } from "next/cache";
+import { getUserSessionServer } from "./auth-actions";
 
 const sleep = (seconds: number = 1): Promise<boolean> => {
   return new Promise((resolve) => {
@@ -29,6 +30,7 @@ export const toggleTodo = async (id: string, complete: boolean): Promise<Todo> =
 };
 
 export const addTodo = async (description: string) => {
+  const user = getUserSessionServer();
   try {
     const createTodo = await prisma.todo.create({ data: { description } });
 
