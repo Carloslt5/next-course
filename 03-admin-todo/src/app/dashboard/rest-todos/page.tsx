@@ -5,6 +5,7 @@ import { getUserSessionServer } from "@/actions/auth-actions";
 import { NewTodo } from "@/components/NewTodo";
 import { TodoGrid } from "@/components/TodoGrid";
 import prisma from "@/libs/prisma";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "TODO List",
@@ -13,6 +14,7 @@ export const metadata = {
 
 export default async function RestTodosPage() {
   const user = await getUserSessionServer();
+  if (!user) redirect("api/auth/signin");
 
   const todos = await prisma.todo.findMany({
     where: { userId: user?.id },

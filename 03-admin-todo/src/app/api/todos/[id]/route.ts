@@ -1,4 +1,6 @@
+import { getUserSessionServer } from "@/actions/auth-actions";
 import prisma from "@/libs/prisma";
+import { Todo } from "@prisma/client";
 import { NextResponse } from "next/server";
 import * as yup from "yup";
 
@@ -8,9 +10,20 @@ type Segments = {
   };
 };
 
+const getTodo = async (id: string): Promise<Todo | null> => {
+  const user = await getUserSessionServer();
+  if (!user) return null;
+
+  const todo = await prisma.todo.findFirst({ where: { id } });
+  if (todo?.userId !== user.id) return null;
+
+  return todo;
+};
+
 export async function GET(request: Request, { params }: Segments) {
   const { id } = params;
-  const todo = await prisma.todo.findFirst({ where: { id } });
+  const todo = await getTodo(id);
+
   if (!todo) {
     return NextResponse.json({ messagge: `Todo by ID ${id} not found` }, { status: 400 });
   }
@@ -25,7 +38,8 @@ const putTodoSchema = yup.object({
 export async function PUT(request: Request, { params }: Segments) {
   try {
     const { id } = params;
-    const todo = await prisma.todo.findFirst({ where: { id } });
+    const todo = await getTodo(id);
+
     if (!todo) {
       return NextResponse.json({ messagge: `Todo by ID ${id} not found` }, { status: 400 });
     }
