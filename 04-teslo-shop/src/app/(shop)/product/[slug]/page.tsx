@@ -1,3 +1,4 @@
+import { QuantitySelector } from "@/components/product/QuantitySelector";
 import { SizeSelector } from "@/components/product/SizeSelector";
 import { titleFont } from "@/config/fonts";
 import { initialData } from "@/seed/seed";
@@ -25,6 +26,7 @@ export default function ProductPage({ params }: ProductPageProps) {
         <p className="text-lg mb-5">${product.price}</p>
 
         <SizeSelector selectedSize={product.sizes[0]} availableSizes={product.sizes} />
+        <QuantitySelector quantity={2} />
 
         <button className="btn-primary my-5">Add to cart</button>
         <h1 className="font-bold text-sm">Description</h1>
