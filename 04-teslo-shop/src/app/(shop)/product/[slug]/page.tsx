@@ -1,3 +1,5 @@
+import { SizeSelector } from "@/components/product/SizeSelector";
+import { titleFont } from "@/config/fonts";
 import { initialData } from "@/seed/seed";
 import { notFound } from "next/navigation";
 
@@ -16,8 +18,18 @@ export default function ProductPage({ params }: ProductPageProps) {
   }
 
   return (
-    <div>
-      <h1>Product page</h1>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="col-span-1 md:col-span-2 bg-green-200">hola mundo</div>
+      <div className="col-span-1 bg-green-500">
+        <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>{product.title}</h1>
+        <p className="text-lg mb-5">${product.price}</p>
+
+        <SizeSelector selectedSize={product.sizes[0]} availableSizes={product.sizes} />
+
+        <button className="btn-primary my-5">Add to cart</button>
+        <h1 className="font-bold text-sm">Description</h1>
+        <p className="font-light">{product.description}</p>
+      </div>
     </div>
   );
 }
