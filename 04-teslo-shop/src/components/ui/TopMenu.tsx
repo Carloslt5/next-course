@@ -1,8 +1,12 @@
+"use client";
 import { titleFont } from "@/config/fonts";
+import { useMenuStore } from "@/stores/ui-menu";
 import Link from "next/link";
 import { IoCartOutline, IoSearchOutline } from "react-icons/io5";
 
 export const TopMenu = () => {
+  const openSideMenu = useMenuStore((state) => state.openSideMenu);
+
   return (
     <nav className="flex px-5 justify-between items-center w-full py-1">
       <div>
@@ -46,7 +50,12 @@ export const TopMenu = () => {
           </div>
         </Link>
 
-        <button className="mx-2 p-2 rounded-md transition-all hover:bg-gray-100">Menu</button>
+        <button
+          className="mx-2 p-2 rounded-md transition-all hover:bg-gray-100"
+          onClick={openSideMenu}
+        >
+          Menu
+        </button>
       </div>
     </nav>
   );
