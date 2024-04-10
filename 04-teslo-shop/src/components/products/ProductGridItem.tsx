@@ -21,6 +21,7 @@ export const ProductGridItem = ({ product }: ProductGridItemProps) => {
           height={500}
           onMouseEnter={() => setDisplayImage(product.images[1])}
           onMouseLeave={() => setDisplayImage(product.images[0])}
+          priority
         />
       </Link>
 
