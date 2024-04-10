@@ -17,7 +17,6 @@ type ProductSlideshowProps = {
 };
 
 export const ProductSlideshow = ({ images, title, className }: ProductSlideshowProps) => {
-  console.log("🚀 --------- images", images);
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperObject>();
 
   return (
@@ -31,18 +30,43 @@ export const ProductSlideshow = ({ images, title, className }: ProductSlideshowP
         }
         spaceBetween={10}
         navigation={true}
+        // autoplay={{ delay: 2500 }}
         thumbs={{ swiper: thumbsSwiper }}
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper2"
+      >
+        {images.map((image) => (
+          <SwiperSlide key={image} className="">
+            <Image
+              src={`/products/${image}`}
+              alt={title}
+              className="rounded-md"
+              height={800}
+              width={1024}
+              priority
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      <Swiper
+        onSwiper={setThumbsSwiper}
+        spaceBetween={10}
+        slidesPerView={4}
+        freeMode={true}
+        watchSlidesProgress={true}
+        modules={[FreeMode, Navigation, Thumbs]}
+        className="mySwiper"
       >
         {images.map((image) => (
           <SwiperSlide key={image}>
             <Image
               src={`/products/${image}`}
               alt={title}
-              className="rounded-md object-fill"
-              height={800}
-              width={1024}
+              className="rounded-md "
+              height={300}
+              width={300}
+              priority
             />
           </SwiperSlide>
         ))}

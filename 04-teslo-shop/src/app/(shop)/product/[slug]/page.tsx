@@ -22,11 +22,11 @@ export default function ProductPage({ params }: ProductPageProps) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div className="col-span-1 md:col-span-2 bg-green-200">
+      <div className="col-span-1 md:col-span-2">
         <ProductSlideshow images={product.images} title={product.title} />
       </div>
 
-      <div className="col-span-1 bg-green-500">
+      <div className="col-span-1">
         <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>{product.title}</h1>
         <p className="text-lg mb-5">${product.price}</p>
 
