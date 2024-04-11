@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
-import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+import { Autoplay, FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./Slideshow.css";
 
@@ -30,13 +30,13 @@ export const ProductSlideshow = ({ images, title, className }: ProductSlideshowP
         }
         spaceBetween={10}
         navigation={true}
-        // autoplay={{ delay: 2500 }}
+        autoplay={{ delay: 2500 }}
         thumbs={{ swiper: thumbsSwiper }}
-        modules={[FreeMode, Navigation, Thumbs]}
+        modules={[FreeMode, Navigation, Thumbs, Autoplay]}
         className="mySwiper2"
       >
         {images.map((image) => (
-          <SwiperSlide key={image} className="">
+          <SwiperSlide key={image}>
             <Image
               src={`/products/${image}`}
               alt={title}

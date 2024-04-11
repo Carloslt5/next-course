@@ -1,5 +1,6 @@
 import { QuantitySelector } from "@/components/product/QuantitySelector";
 import { SizeSelector } from "@/components/product/SizeSelector";
+import { ProductMobileSlideshow } from "@/components/product/Slideshow/ProductMobileSlideshow";
 import { ProductSlideshow } from "@/components/product/Slideshow/ProductSlideshow";
 
 import { titleFont } from "@/config/fonts";
@@ -21,9 +22,18 @@ export default function ProductPage({ params }: ProductPageProps) {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-4">
       <div className="col-span-1 md:col-span-2">
-        <ProductSlideshow images={product.images} title={product.title} />
+        <ProductMobileSlideshow
+          images={product.images}
+          title={product.title}
+          className="block md:hidden"
+        />
+        <ProductSlideshow
+          images={product.images}
+          title={product.title}
+          className="hidden md:block"
+        />
       </div>
 
       <div className="col-span-1">
