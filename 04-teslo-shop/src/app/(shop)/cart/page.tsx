@@ -20,11 +20,12 @@ export default function CartPage() {
             </Link>
 
             {productInCart.map((product) => (
-              <div key={product.slug} className="flex gap-3 mb-5">
+              <div key={product.slug} className="flex gap-3 mb-5 h-[100px]">
                 <Image
                   src={`/products/${product.images[0]}`}
                   width={100}
                   height={100}
+                  style={{ objectFit: "cover" }}
                   alt={product.title}
                   priority
                 />
