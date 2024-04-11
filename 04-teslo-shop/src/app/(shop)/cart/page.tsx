@@ -9,7 +9,7 @@ const productInCart = [initialData.products[0], initialData.products[1], initial
 export default function CartPage() {
   return (
     <div className="flex justify-center items-center mb-72 px-10 sm:px-1">
-      <div className="flex flex-col w-[1400px] bg-slate-400">
+      <div className="flex flex-col w-[1400px]">
         <Title title={"Cart"} />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -26,9 +26,10 @@ export default function CartPage() {
                   width={100}
                   height={100}
                   alt={product.title}
+                  priority
                 />
                 <article>
-                  <p className="font-bold">{product.title}</p>
+                  <p>{product.title}</p>
                   <p>${product.price}</p>
                   <QuantitySelector quantity={3} />
                   <button className="text-red-900 underline">Remove</button>
@@ -38,21 +39,23 @@ export default function CartPage() {
           </div>
 
           <div className="flex flex-col bg-white shadow-md rounded-md p-4">
-            <h2 className="mb-2 text-2xl">Order Summary</h2>
+            <div>
+              <h2 className="mb-2 text-2xl font-bold">Order Summary</h2>
+              <article className="grid grid-cols-2">
+                <span>Product Nº</span>
+                <span className="text-right">Quantity</span>
 
-            <div className="grid grid-cols-2">
-              <span>Product Nº</span>
-              <span className="text-right">Quantity</span>
+                <span>Subtotal</span>
+                <span className="text-right">$100</span>
 
-              <span>Subtotal</span>
-              <span className="text-right">$100</span>
+                <span>Taxes 15%</span>
+                <span className="text-right">$100</span>
 
-              <span>Taxes 15%</span>
-              <span className="text-right">$100</span>
-
-              <span className="mt-5 font-bold text-xl ">Total:</span>
-              <span className="mt-5 font-bold text-xl text-right">$100</span>
+                <span className="mt-5 font-bold text-xl ">Total:</span>
+                <span className="mt-5 font-bold text-xl text-right">$100</span>
+              </article>
             </div>
+
             <Link href={"/checkout/address"} className="flex justify-center btn-primary mt-5">
               Checkout
             </Link>
