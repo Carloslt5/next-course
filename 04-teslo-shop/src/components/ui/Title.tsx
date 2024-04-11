@@ -2,7 +2,7 @@ import { titleFont } from "@/config/fonts";
 
 type TitleProps = {
   title: string;
-  subTitle: string;
+  subTitle?: string;
   className?: string;
 };
 
