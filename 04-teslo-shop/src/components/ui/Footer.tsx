@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const Footer = () => {
   return (
-    <div className="flex w-full justify-center text-xs gap-3 py-4">
+    <div className="flex w-full justify-center text-xs gap-3 py-4 mt-10">
       <Link href={"/"}>
         <span className="font-bold">Teslo</span>
         <span> | shop </span>

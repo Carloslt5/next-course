@@ -7,28 +7,34 @@ const productInCart = [initialData.products[0], initialData.products[1], initial
 
 export default function CheackoutPage() {
   return (
-    <div className="flex justify-center items-center mb-72 px-10 sm:px-1">
+    <div className="flex justify-center items-center px-1">
       <div className="flex flex-col w-[1400px] ">
         <Title title={"Verify order"} />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="flex flex-col mt-5">
-            <span className="text-lg">Adjust products</span>
-            <Link href={"/cart"} className="underline cursor-pointer mb-5">
-              Edit cart
-            </Link>
+          <div className="flex flex-col mt-5 gap-4">
+            <div className="flex flex-col">
+              <span className="text-lg">Adjust products</span>
+              <Link href={"/cart"} className="underline cursor-pointer mb-5">
+                Edit cart
+              </Link>
+            </div>
 
             {productInCart.map((product) => (
-              <div key={product.slug} className="flex gap-3 mb-5 h-[100px]">
-                <Image
-                  src={`/products/${product.images[0]}`}
-                  width={100}
-                  height={100}
-                  style={{ objectFit: "cover" }}
-                  alt={product.title}
-                  priority
-                />
-                <article>
+              <div key={product.slug} className="flex gap-2">
+                <figure className="w-1/3 max-w-[100px] bg-green-100 rounded-md overflow-hidden">
+                  <Image
+                    src={`/products/${product.images[0]}`}
+                    width={120}
+                    height={120}
+                    style={{ objectFit: "cover", width: "100%", height: "100%" }}
+                    alt={product.title}
+                    className="rounded-md"
+                    priority
+                  />
+                </figure>
+
+                <article className="w-2/3">
                   <p>{product.title}</p>
                   <p>${product.price} x 3</p>
                   <p className="font-bold">Subtotal: ${product.price * 3}</p>
