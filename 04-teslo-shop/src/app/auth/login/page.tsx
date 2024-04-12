@@ -10,8 +10,8 @@ export default function Login() {
         <label htmlFor="email">Email</label>
         <input className="px-5 py-2 border bg-gray-200 rounded mb-5" type="email" />
 
-        <label htmlFor="email">Password</label>
-        <input className="px-5 py-2 border bg-gray-200 rounded mb-5" type="email" />
+        <label htmlFor="password">Password</label>
+        <input className="px-5 py-2 border bg-gray-200 rounded mb-5" type="password" />
 
         <button className="btn-primary">Login</button>
 
@@ -21,7 +21,7 @@ export default function Login() {
           <div className="flex-1 border-t border-gray-500"></div>
         </div>
 
-        <Link href="/auth/new-account" className="btn-secondary text-center">
+        <Link href="/auth/signup" className="btn-secondary text-center">
           Create account
         </Link>
       </div>
