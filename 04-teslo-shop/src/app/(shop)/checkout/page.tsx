@@ -67,7 +67,7 @@ export default function CheackoutPage() {
               </article>
             </div>
 
-            <Link href={"/checkout/address"} className="flex justify-center btn-primary mt-5">
+            <Link href={"/orders/123"} className="flex justify-center btn-primary mt-5">
               Place order
             </Link>
           </div>
