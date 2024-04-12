@@ -3,10 +3,15 @@ import { Title } from "@/components/ui/Title";
 import { initialData } from "@/seed/seed";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 const productInCart = [initialData.products[0], initialData.products[1], initialData.products[2]];
 
 export default function CartPage() {
+  if (productInCart.length === 0) {
+    redirect("/empty");
+  }
+
   return (
     <div className="flex justify-center items-center mb-72 px-10 sm:px-1">
       <div className="flex flex-col w-[1400px]">

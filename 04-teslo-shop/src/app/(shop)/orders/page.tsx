@@ -1,4 +1,5 @@
 import { Title } from "@/components/ui/Title";
+import { PAID, PENDING_PAYMENT } from "@/constants/OrderStatus.const";
 import Link from "next/link";
 import { IoCardOutline } from "react-icons/io5";
 
@@ -31,7 +32,7 @@ export default function OrdersPage() {
               <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Mark</td>
               <td className="flex items-center text-sm  text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                 <IoCardOutline className="text-green-800" />
-                <span className="mx-2 text-green-800">Paid</span>
+                <span className="mx-2 text-green-800">{PAID}</span>
               </td>
               <td className="text-sm text-gray-900 font-light px-6 ">
                 <Link href="/orders/123" className="hover:underline">
@@ -45,7 +46,7 @@ export default function OrdersPage() {
               <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Mark</td>
               <td className="flex items-center text-sm  text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                 <IoCardOutline className="text-red-800" />
-                <span className="mx-2 text-red-800">Pending payment</span>
+                <span className="mx-2 text-red-800">{PENDING_PAYMENT}</span>
               </td>
               <td className="text-sm text-gray-900 font-light px-6 ">
                 <Link href="/orders/123" className="hover:underline">

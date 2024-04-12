@@ -1,4 +1,5 @@
 import { Title } from "@/components/ui/Title";
+import { PAID } from "@/constants/OrderStatus.const";
 import { initialData } from "@/seed/seed";
 import clsx from "clsx";
 import Image from "next/image";
@@ -31,8 +32,8 @@ export default function OrderPage({ params }: OrderPageProps) {
               )}
             >
               <IoCardOutline size={30} />
-              {/* <span>Pending payment</span> */}
-              <span>Paid</span>
+              {/* <span>{ PENDING_PAYMENT}t</span> */}
+              <span>{PAID}</span>
             </div>
 
             {productInCart.map((product) => (
@@ -93,8 +94,8 @@ export default function OrderPage({ params }: OrderPageProps) {
               )}
             >
               <IoCardOutline size={30} />
-              {/* <span>Pending payment</span> */}
-              <span>Paid</span>
+              {/* <span>{ PENDING_PAYMENT}</span> */}
+              <span>{PAID}</span>
             </div>
           </div>
         </div>
