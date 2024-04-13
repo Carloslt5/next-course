@@ -12,7 +12,7 @@ export default function CheackoutPage() {
         <Title title={"Verify order"} />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="flex flex-col mt-5 gap-4">
+          <div className="flex flex-col gap-4">
             <div className="flex flex-col">
               <span className="text-lg">Adjust products</span>
               <Link href={"/cart"} className="underline cursor-pointer mb-5">

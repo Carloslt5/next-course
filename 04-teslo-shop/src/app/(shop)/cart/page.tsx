@@ -18,7 +18,7 @@ export default function CartPage() {
         <Title title={"Cart"} />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="flex flex-col mt-5 gap-4">
+          <div className="flex flex-col gap-4">
             <div className="flex flex-col">
               <span className="text-lg">Add more products</span>
               <Link href={"/"} className="underline cursor-pointer mb-5">
