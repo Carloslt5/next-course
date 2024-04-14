@@ -1,6 +1,7 @@
 import { getPaginatedProductsWithImages } from "@/actions/products-pagination";
 import { ProductsGrid } from "@/components/products/ProductsGrid";
 import { Title } from "@/components/ui/Title";
+import { redirect } from "next/navigation";
 
 type HomeProps = {
   searchParams: {
@@ -10,7 +11,10 @@ type HomeProps = {
 
 export default async function Home({ searchParams }: HomeProps) {
   const page = searchParams.page ? parseInt(searchParams.page) : 1;
-  const { products } = await getPaginatedProductsWithImages({ page });
+  const { currentPages, totalPages, products } = await getPaginatedProductsWithImages({ page });
+  console.log("🚀 --------- currentPages", currentPages, totalPages);
+
+  if (products.length === 0) redirect("/");
 
   return (
     <>

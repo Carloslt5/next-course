@@ -1,6 +1,5 @@
 "use server";
 
-import { Product } from "@/interfaces/product.type";
 import prisma from "@/lib/prisma";
 
 type PaginationOptionsProps = {
@@ -11,7 +10,7 @@ type PaginationOptionsProps = {
 export const getPaginatedProductsWithImages = async ({
   page = 1,
   take = 12,
-}: PaginationOptionsProps): Promise<{ products: Product[] }> => {
+}: PaginationOptionsProps) => {
   if (isNaN(Number(page))) page = 1;
   if (page < 1) page = 1;
 
@@ -22,7 +21,12 @@ export const getPaginatedProductsWithImages = async ({
       include: { ProductImage: { take: 2, select: { url: true } } },
     });
 
+    const totalCount = await prisma.product.count({});
+    const totalPages = Math.ceil(totalCount / take);
+
     return {
+      currentPages: page,
+      totalPages: totalPages,
       products: allProducts.map((product) => ({
         ...product,
         images: product.ProductImage.map((image) => image.url),
