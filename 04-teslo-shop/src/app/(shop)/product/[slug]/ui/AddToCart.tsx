@@ -11,13 +11,17 @@ type AddToCartProps = {
 export const AddToCart = ({ product }: AddToCartProps) => {
   const [size, setSize] = useState<Size | undefined>();
   const [quantity, setQuantity] = useState<number>(1);
+  const [posted, setPosted] = useState<boolean>(false);
 
   const addToCart = () => {
+    setPosted(true);
+    if (!size) return;
     console.log({ size, quantity });
   };
 
   return (
     <>
+      {posted && !size && <p className="text-s, text-red-500">You need select size</p>}
       <SizeSelector
         selectedSize={size}
         availableSizes={product.sizes}
