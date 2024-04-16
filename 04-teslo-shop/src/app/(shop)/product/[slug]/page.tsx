@@ -5,6 +5,7 @@ import { QuantitySelector } from "@/components/product/QuantitySelector";
 import { SizeSelector } from "@/components/product/SizeSelector";
 import { ProductMobileSlideshow } from "@/components/product/Slideshow/ProductMobileSlideshow";
 import { ProductSlideshow } from "@/components/product/Slideshow/ProductSlideshow";
+import { StockLabel } from "@/components/product/StockLabel";
 import { titleFont } from "@/config/fonts";
 import { notFound } from "next/navigation";
 
@@ -38,6 +39,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       </div>
 
       <div className="col-span-1">
+        <StockLabel slug={product.slug} />
         <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>{product.title}</h1>
         <p className="text-lg mb-5">${product.price}</p>
 
