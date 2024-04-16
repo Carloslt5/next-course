@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import { getPaginatedProductsWithImages } from "@/actions/products-pagination";
 import { ProductsGrid } from "@/components/products/ProductsGrid";
 import { Pagination } from "@/components/ui/Pagination";

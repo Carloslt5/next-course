@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import { getPaginatedProductsWithImages } from "@/actions/products-pagination";
 import { ProductsGrid } from "@/components/products/ProductsGrid";
 import { Pagination } from "@/components/ui/Pagination";
@@ -24,10 +26,6 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
   });
 
   if (products.length === 0) redirect(`/gender/${gender}`);
-
-  // if (id === "kids") {
-  //   notFound();
-  // }
 
   const gendeLabels: Record<string, string> = {
     men: "Men",
