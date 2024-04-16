@@ -4,7 +4,7 @@ import { getPaginatedProductsWithImages } from "@/actions/products-pagination";
 import { ProductsGrid } from "@/components/products/ProductsGrid";
 import { Pagination } from "@/components/ui/Pagination";
 import { Title } from "@/components/ui/Title";
-import { Gender } from "@prisma/client";
+import { Gender } from "@/interfaces/product.type";
 import { redirect } from "next/navigation";
 
 type CategoryPageProps = {
