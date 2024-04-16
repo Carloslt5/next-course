@@ -6,7 +6,7 @@ type State = {
   closeSideMenu: () => void;
 };
 
-export const useMenuStore = create<State>((set) => ({
+export const useMenuStore = create<State>()((set) => ({
   isSideMenuOpen: false,
   openSideMenu: () => set({ isSideMenuOpen: true }),
   closeSideMenu: () => set({ isSideMenuOpen: false }),

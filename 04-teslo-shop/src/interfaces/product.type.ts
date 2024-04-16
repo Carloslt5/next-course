@@ -12,6 +12,15 @@ export interface Product {
   gender: Gender;
 }
 
+export interface CartProduct {
+  id: string;
+  image: string;
+  quantity: number;
+  size: Size;
+  slug: string;
+  title: string;
+}
+
 export type Gender = "men" | "women" | "kid" | "unisex";
 export type Size = "XS" | "S" | "M" | "L" | "XL" | "XXL" | "XXXL";
 export type Type = "shirts" | "pants" | "hoodies" | "hats";
