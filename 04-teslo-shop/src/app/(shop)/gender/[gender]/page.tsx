@@ -5,6 +5,8 @@ import { ProductsGrid } from "@/components/products/ProductsGrid";
 import { Pagination } from "@/components/ui/Pagination";
 import { Title } from "@/components/ui/Title";
 import { Gender } from "@/interfaces/product.type";
+import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 type CategoryPageProps = {
@@ -15,6 +17,19 @@ type CategoryPageProps = {
     page?: string;
   };
 };
+
+export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+  const { gender } = params;
+
+  return {
+    title: `${capitalizeFirstLetter(gender)}`,
+    description: `All ${gender} products`,
+    openGraph: {
+      title: `${capitalizeFirstLetter(gender)}`,
+      description: `All ${gender} products`,
+    },
+  };
+}
 
 export default async function CategoryPage({ params, searchParams }: CategoryPageProps) {
   const { gender } = params;
@@ -37,8 +52,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
   return (
     <>
       <Title
-        title={`Articles for 
-        ${gendeLabels[gender]}`}
+        title={`Articles for ${gendeLabels[gender]}`}
         subTitle={"All products"}
         className="mb-2"
       />
