@@ -13,16 +13,16 @@ export const ProductsInCart = () => {
   const removeProduct = useCartStore((state) => state.removeProduct);
   const [loaded, setLoaded] = useState(false);
 
-  if (productInCart.length <= 0) {
-    redirect("/empty");
-  }
-
   useEffect(() => {
     setLoaded(true);
   }, []);
 
   if (!loaded) {
     return <SkeletonProdutsInCart />;
+  }
+
+  if (productInCart.length <= 0 && loaded) {
+    redirect("/empty");
   }
 
   return (

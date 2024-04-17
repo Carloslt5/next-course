@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { IoCartOutline } from "react-icons/io5";
 
+export const metadata = {
+  title: "Your cart",
+  description:
+    "Explore the products in your cart and complete your purchase. Your cart is currently empty.",
+};
+
 export default function EmptyPage() {
   return (
     <div className="flex justify-center items-center h-[800px] gap-2">

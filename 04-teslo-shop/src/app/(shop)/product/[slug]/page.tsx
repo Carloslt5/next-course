@@ -1,13 +1,13 @@
 export const revalidate = 604800; //7 days
 
 import { getProductBySlug } from "@/actions/get-product-by-slug";
+import { AddToCart } from "@/components/product/AddToCart";
 import { ProductMobileSlideshow } from "@/components/product/Slideshow/ProductMobileSlideshow";
 import { ProductSlideshow } from "@/components/product/Slideshow/ProductSlideshow";
 import { StockLabel } from "@/components/product/StockLabel";
 import { titleFont } from "@/config/fonts";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import { AddToCart } from "./ui/AddToCart";
 
 type ProductPageProps = {
   params: {

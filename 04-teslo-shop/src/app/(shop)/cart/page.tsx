@@ -1,7 +1,7 @@
+import { OrderSummaryInfo } from "@/components/cart/OrderSummaryInfo";
+import { ProductsInCart } from "@/components/cart/ProductsInCart";
 import { Title } from "@/components/ui/Title";
 import Link from "next/link";
-import { OrderSummaryInfo } from "./ui/OrderSummaryInfo";
-import { ProductsInCart } from "./ui/ProductsInCart";
 
 export const metadata = {
   title: "Your cart",
