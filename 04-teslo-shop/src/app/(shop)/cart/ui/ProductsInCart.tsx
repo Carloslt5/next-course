@@ -9,6 +9,7 @@ import { SkeletonProdutsInCart } from "./SkeletonProdutsInCart";
 export const ProductsInCart = () => {
   const productInCart = useCartStore((state) => state.cart);
   const updateProductToCart = useCartStore((state) => state.updateProductToCart);
+  const removeProduct = useCartStore((state) => state.removeProduct);
 
   const [loaded, setLoaded] = useState(false);
 
@@ -47,7 +48,9 @@ export const ProductsInCart = () => {
               quantity={product.quantity}
               onSelectedQuantity={(quantity) => updateProductToCart(product, quantity)}
             />
-            <button className="text-red-900 underline">Remove</button>
+            <button onClick={() => removeProduct(product)} className="text-red-900 underline">
+              Remove
+            </button>
           </article>
         </div>
       ))}
