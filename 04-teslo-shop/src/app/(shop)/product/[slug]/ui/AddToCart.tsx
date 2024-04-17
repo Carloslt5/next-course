@@ -23,8 +23,9 @@ export const AddToCart = ({ product }: AddToCartProps) => {
       image: product.images[0],
       quantity: quantity,
       size: size,
+      price: product.price,
       slug: product.slug,
-      title: product.slug,
+      title: product.title,
     };
     addProductToCart(cartProduct);
     setSize(undefined);
