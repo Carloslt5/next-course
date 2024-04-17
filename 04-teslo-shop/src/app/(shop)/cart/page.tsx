@@ -2,6 +2,7 @@ import { Title } from "@/components/ui/Title";
 import { initialData } from "@/seed/seed";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { OrderSummaryInfo } from "./ui/OrderSummaryInfo";
 import { ProductsInCart } from "./ui/ProductsInCart";
 
 const productInCart = [initialData.products[0], initialData.products[1], initialData.products[2]];
@@ -29,22 +30,7 @@ export default function CartPage() {
           </div>
 
           <div className="flex flex-col bg-white shadow-md rounded-md p-4 h-fit">
-            <div>
-              <h2 className="mb-2 text-2xl font-bold">Order Summary</h2>
-              <article className="grid grid-cols-2">
-                <span>Product Nº</span>
-                <span className="text-right">Quantity</span>
-
-                <span>Subtotal</span>
-                <span className="text-right">$100</span>
-
-                <span>Taxes 15%</span>
-                <span className="text-right">$100</span>
-
-                <span className="mt-5 font-bold text-xl ">Total:</span>
-                <span className="mt-5 font-bold text-xl text-right">$100</span>
-              </article>
-            </div>
+            <OrderSummaryInfo />
 
             <Link href={"/checkout/address"} className="flex justify-center btn-primary mt-5">
               Checkout
