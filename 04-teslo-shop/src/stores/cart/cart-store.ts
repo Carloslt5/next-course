@@ -5,6 +5,7 @@ import { persist } from "zustand/middleware";
 type State = {
   cart: CartProduct[];
 
+  getTotalItems: () => number;
   addProductToCart: (product: CartProduct) => void;
   // updateProductToCart
   // removeProduct
@@ -15,6 +16,10 @@ export const useCartStore = create<State>()(
     (set, get) => ({
       cart: [],
 
+      getTotalItems: () => {
+        const { cart } = get();
+        return cart.reduce((acc, item) => acc + item.quantity, 0);
+      },
       addProductToCart: (product: CartProduct) => {
         const { cart } = get();
         const productInCart = cart.some(
