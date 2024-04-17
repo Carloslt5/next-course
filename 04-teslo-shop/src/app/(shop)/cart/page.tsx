@@ -1,17 +1,14 @@
 import { Title } from "@/components/ui/Title";
-import { initialData } from "@/seed/seed";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { OrderSummaryInfo } from "./ui/OrderSummaryInfo";
 import { ProductsInCart } from "./ui/ProductsInCart";
 
-const productInCart = [initialData.products[0], initialData.products[1], initialData.products[2]];
+export const metadata = {
+  title: "Your cart",
+  description: "Explore the products in your cart and complete your purchase",
+};
 
 export default function CartPage() {
-  if (productInCart.length === 0) {
-    redirect("/empty");
-  }
-
   return (
     <div className="flex justify-center items-center">
       <div className="flex flex-col w-[1400px]">

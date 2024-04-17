@@ -3,6 +3,7 @@ import { QuantitySelector } from "@/components/product/QuantitySelector";
 import { useCartStore } from "@/stores/cart/cart-store";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SkeletonProdutsInCart } from "./SkeletonProdutsInCart";
 
@@ -10,8 +11,11 @@ export const ProductsInCart = () => {
   const productInCart = useCartStore((state) => state.cart);
   const updateProductToCart = useCartStore((state) => state.updateProductToCart);
   const removeProduct = useCartStore((state) => state.removeProduct);
-
   const [loaded, setLoaded] = useState(false);
+
+  if (productInCart.length <= 0) {
+    redirect("/empty");
+  }
 
   useEffect(() => {
     setLoaded(true);
