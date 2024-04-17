@@ -8,6 +8,7 @@ import { SkeletonProdutsInCart } from "./SkeletonProdutsInCart";
 
 export const ProductsInCart = () => {
   const productInCart = useCartStore((state) => state.cart);
+  const updateProductToCart = useCartStore((state) => state.updateProductToCart);
 
   const [loaded, setLoaded] = useState(false);
 
@@ -42,7 +43,10 @@ export const ProductsInCart = () => {
               </p>
             </Link>
             <p className="font-bold">${product.price}</p>
-            <QuantitySelector quantity={3} onSelectedQuantity={(value) => console.log({ value })} />
+            <QuantitySelector
+              quantity={product.quantity}
+              onSelectedQuantity={(quantity) => updateProductToCart(product, quantity)}
+            />
             <button className="text-red-900 underline">Remove</button>
           </article>
         </div>

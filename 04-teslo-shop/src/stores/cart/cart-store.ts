@@ -7,7 +7,7 @@ type State = {
 
   getTotalItems: () => number;
   addProductToCart: (product: CartProduct) => void;
-  // updateProductToCart
+  updateProductToCart: (product: CartProduct, quantity: number) => void;
   // removeProduct
 };
 
@@ -39,6 +39,16 @@ export const useCartStore = create<State>()(
         });
 
         set({ cart: updateProductInCart });
+      },
+      updateProductToCart: (product: CartProduct, quantity: number) => {
+        const { cart } = get();
+        const updatedProductToCart = cart.map((item) => {
+          if (item.id === product.id && item.size === product.size) {
+            return { ...item, quantity: quantity };
+          }
+          return item;
+        });
+        set({ cart: updatedProductToCart });
       },
     }),
     { name: "shopping-cart" }
