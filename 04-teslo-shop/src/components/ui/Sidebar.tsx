@@ -1,6 +1,6 @@
 "use client";
 
-import { useMenuStore } from "@/stores/ui-menu";
+import { useMenuStore } from "@/stores/menu-ui/menu-ui";
 import clsx from "clsx";
 import Link from "next/link";
 import {

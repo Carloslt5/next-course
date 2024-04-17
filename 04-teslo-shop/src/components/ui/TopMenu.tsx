@@ -1,7 +1,7 @@
 "use client";
 import { titleFont } from "@/config/fonts";
 import { useCartStore } from "@/stores/cart/cart-store";
-import { useMenuStore } from "@/stores/ui-menu";
+import { useMenuStore } from "@/stores/menu-ui/menu-ui";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { IoCartOutline, IoSearchOutline } from "react-icons/io5";

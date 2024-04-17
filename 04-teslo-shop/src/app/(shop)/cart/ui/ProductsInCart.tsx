@@ -25,7 +25,7 @@ export const ProductsInCart = () => {
     <>
       {productInCart.map((product) => (
         <div key={`${product.slug}-${product.size}`} className="flex flex-row gap-2">
-          <figure className=" w-1/3 max-w-[100px] bg-green-100 rounded-md overflow-hidden">
+          <figure className=" w-1/3 max-w-[100px] bg-white rounded-md overflow-hidden">
             <Image
               src={`/products/${product.image}`}
               width={120}
