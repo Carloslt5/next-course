@@ -1,10 +1,12 @@
 "use client";
 import { authenticate } from "@/actions/auth/login";
+import clsx from "clsx";
 import Link from "next/link";
-import { useFormState } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
+import { IoInformationOutline } from "react-icons/io5";
 
 export const LoginForm = () => {
-  const [state, dispatch] = useFormState(authenticate, undefined);
+  const [errorMessage, dispatch] = useFormState(authenticate, undefined);
 
   return (
     <form action={dispatch} className="flex flex-col w-full">
@@ -18,9 +20,16 @@ export const LoginForm = () => {
         name="password"
       />
 
-      <button type="submit" className="btn-primary">
-        Login
-      </button>
+      <div className="flex h-8 items-center my-2" aria-live="polite" aria-atomic="true">
+        {errorMessage && (
+          <>
+            <IoInformationOutline className="h-5 w-5 text-red-500" />
+            <p className="text-sm text-red-500">{errorMessage}</p>
+          </>
+        )}
+      </div>
+
+      <LoginButton />
 
       <div className="flex items-center my-5">
         <div className="flex-1 border-t border-gray-500"></div>
@@ -34,3 +43,20 @@ export const LoginForm = () => {
     </form>
   );
 };
+
+function LoginButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <button
+      type="submit"
+      className={clsx({
+        "btn-primary": !pending,
+        "btn-disable": pending,
+      })}
+      disabled={pending}
+    >
+      Login
+    </button>
+  );
+}
