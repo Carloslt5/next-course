@@ -16,7 +16,8 @@ export const authConfig: NextAuthConfig = {
         if (!parsedCredentials.success) return null;
 
         const { email, password } = parsedCredentials.data;
-        console.log("🚀 --------- data", { email, password });
+        console.log("AUTH CONFIG ---------->");
+        console.log({ email, password });
 
         return null;
       },
