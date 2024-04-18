@@ -5,7 +5,6 @@ import { useFormState } from "react-dom";
 
 export const LoginForm = () => {
   const [state, dispatch] = useFormState(authenticate, undefined);
-  console.log("🚀 --------- state", state);
 
   return (
     <form action={dispatch} className="flex flex-col w-full">
