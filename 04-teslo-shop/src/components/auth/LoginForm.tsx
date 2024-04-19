@@ -9,7 +9,6 @@ import { IoInformationOutline } from "react-icons/io5";
 
 export const LoginForm = () => {
   const [state, dispatch] = useFormState(authenticate, undefined);
-  console.log("🚀 --------- state", state);
   const router = useRouter();
 
   useEffect(() => {

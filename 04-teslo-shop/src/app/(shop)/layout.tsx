@@ -1,12 +1,14 @@
+import { auth } from "@/auth.config";
 import { Footer } from "@/components/ui/Footer";
 import { Sidebar } from "@/components/ui/Sidebar";
 import { TopMenu } from "@/components/ui/TopMenu";
 
-export default function ShopLayout({ children }: { children: React.ReactNode }) {
+export default async function ShopLayout({ children }: { children: React.ReactNode }) {
+  const session = await auth();
   return (
     <main className="min-h-screen flex flex-col">
       <TopMenu />
-      <Sidebar />
+      <Sidebar session={session} />
       <main className="px-1 md:px-10">{children}</main>
       <div className="mt-auto">
         <Footer />
