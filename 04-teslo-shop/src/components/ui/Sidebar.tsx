@@ -4,7 +4,6 @@ import { logout } from "@/actions/auth/logout";
 import { useMenuStore } from "@/stores/menu-ui/menu-ui";
 import clsx from "clsx";
 import { Session } from "next-auth";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import {
   IoCloseOutline,
@@ -24,8 +23,6 @@ type SidebarProps = {
 export const Sidebar = ({ session }: SidebarProps) => {
   const isSideMenuOpen = useMenuStore((state) => state.isSideMenuOpen);
   const closeMenu = useMenuStore((state) => state.closeSideMenu);
-  const user = useSession();
-  console.log("🚀 --------- user", user);
   const isAutenticated = !!session?.user;
   const isAdmin = session?.user.role === "admin";
 
