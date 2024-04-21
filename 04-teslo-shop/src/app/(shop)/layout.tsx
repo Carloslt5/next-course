@@ -1,4 +1,4 @@
-import { auth } from "@/auth.config";
+import { auth } from "@/auth";
 import { Footer } from "@/components/ui/Footer";
 import { Sidebar } from "@/components/ui/Sidebar";
 import { TopMenu } from "@/components/ui/TopMenu";
