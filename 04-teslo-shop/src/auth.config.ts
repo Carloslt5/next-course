@@ -1,6 +1,6 @@
 import { type NextAuthConfig } from "next-auth";
 
-const protectedRoutes = ["/cart", "/profile", "/orders", "/checkout", "/checkout/address"];
+const protectedRoutes = ["/profile", "/checkout"];
 const isRouteProtected = (requestedPath: string): boolean => {
   return protectedRoutes.some((route) => requestedPath.startsWith(route));
 };
