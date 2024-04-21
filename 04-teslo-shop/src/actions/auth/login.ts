@@ -20,3 +20,15 @@ export async function authenticate(prevState: string | undefined, formData: Form
     }
   }
 }
+
+export const login = async (email: string, password: string) => {
+  try {
+    await signIn("credentials", { email, password });
+    return { status: true };
+  } catch (error) {
+    return {
+      status: false,
+      messgge: "Can not init session",
+    };
+  }
+};

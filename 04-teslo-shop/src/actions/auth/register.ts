@@ -23,7 +23,6 @@ export const registerUser = async (name: string, email: string, password: string
       data: user,
     };
   } catch (error) {
-    console.log("🚀 --------- error", error);
     return {
       status: false,
       messgge: "Can not created user",

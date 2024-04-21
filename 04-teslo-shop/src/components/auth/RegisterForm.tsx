@@ -1,8 +1,10 @@
 "use client";
 
+import { login } from "@/actions/auth/login";
 import { registerUser } from "@/actions/auth/register";
 import clsx from "clsx";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -13,6 +15,7 @@ type FormInputs = {
 };
 
 export const RegisterForm = () => {
+  const router = useRouter();
   const [errorMessage, setErrorMessage] = useState("");
 
   const {
@@ -23,15 +26,14 @@ export const RegisterForm = () => {
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     setErrorMessage("");
-    console.log("🚀 --------- data", data);
-
     const { name, email, password } = data;
     const res = await registerUser(name, email, password);
     if (!res.status) {
       setErrorMessage(res.messgge);
       return;
     }
-    console.log("🚀 --------- res", res);
+    await login(email.toLowerCase(), password);
+    router.replace("/");
   };
 
   return (
