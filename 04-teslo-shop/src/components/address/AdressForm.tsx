@@ -6,6 +6,7 @@ import { Country } from "@/interfaces/country.type";
 import { useAddressStore } from "@/stores/address/address-store";
 import clsx from "clsx";
 import { Session } from "next-auth";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
@@ -28,6 +29,7 @@ type AdressFormProps = {
 };
 
 export const AdressForm = ({ countries, session, userStoredAddress }: AdressFormProps) => {
+  const route = useRouter();
   const {
     register,
     handleSubmit,
@@ -58,6 +60,7 @@ export const AdressForm = ({ countries, session, userStoredAddress }: AdressForm
     } else if (session) {
       deleteUserAddress(session.user.id);
     }
+    route.push("/checkout");
   };
 
   return (
