@@ -1,6 +1,7 @@
 "use client";
 import { deleteUserAddress } from "@/actions/address/delete-user-address";
 import { setUserAddress } from "@/actions/address/set-user-address";
+import { Address } from "@/interfaces/address.type";
 import { Country } from "@/interfaces/country.type";
 import { useAddressStore } from "@/stores/address/address-store";
 import clsx from "clsx";
@@ -22,17 +23,21 @@ type FormInputs = {
 
 type AdressFormProps = {
   countries: Country[];
-  session: Session;
+  session: Session | null;
+  userStoredAddress: Partial<Address>;
 };
 
-export const AdressForm = ({ countries, session }: AdressFormProps) => {
+export const AdressForm = ({ countries, session, userStoredAddress }: AdressFormProps) => {
   const {
     register,
     handleSubmit,
     formState: { isValid },
     reset,
   } = useForm<FormInputs>({
-    defaultValues: {},
+    defaultValues: {
+      ...(userStoredAddress as any),
+      rememberAddress: false,
+    },
   });
 
   const setAddress = useAddressStore((state) => state.setAddress);
@@ -48,9 +53,9 @@ export const AdressForm = ({ countries, session }: AdressFormProps) => {
     setAddress(data);
 
     const { rememberAddress, ...rest } = data;
-    if (data.rememberAddress) {
+    if (session && data.rememberAddress) {
       setUserAddress(rest, session.user.id);
-    } else {
+    } else if (session) {
       deleteUserAddress(session.user.id);
     }
   };
