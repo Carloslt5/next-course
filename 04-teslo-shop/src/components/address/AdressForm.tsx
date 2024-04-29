@@ -4,6 +4,7 @@ import { setUserAddress } from "@/actions/address/set-user-address";
 import { Address } from "@/interfaces/address.type";
 import { Country } from "@/interfaces/country.type";
 import { useAddressStore } from "@/stores/address/address-store";
+import { useCartStore } from "@/stores/cart/cart-store";
 import clsx from "clsx";
 import { Session } from "next-auth";
 import { useRouter } from "next/navigation";
@@ -52,9 +53,9 @@ export const AdressForm = ({ countries, session, userStoredAddress }: AdressForm
   }, [address, reset]);
 
   const onSubmit = (data: FormInputs) => {
-    setAddress(data);
-
     const { rememberAddress, ...rest } = data;
+    setAddress(rest);
+
     if (session && data.rememberAddress) {
       setUserAddress(rest, session.user.id);
     } else if (session) {

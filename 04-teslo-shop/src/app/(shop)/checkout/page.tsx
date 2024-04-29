@@ -1,5 +1,5 @@
 import { PlaceOrder } from "@/components/checkout/PlaceOrder";
-import { ProductsInCartCheckout } from "@/components/checkout/ProductsInCart";
+import { ProductsInCartCheckout } from "@/components/checkout/ProductsInCartCheckout";
 import { Title } from "@/components/ui/Title";
 import Link from "next/link";
 
