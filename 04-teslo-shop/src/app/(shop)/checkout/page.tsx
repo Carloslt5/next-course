@@ -1,10 +1,7 @@
 import { PlaceOrder } from "@/components/checkout/PlaceOrder";
 import { ProductsInCartCheckout } from "@/components/checkout/ProductsInCart";
 import { Title } from "@/components/ui/Title";
-import { initialData } from "@/seed/seed";
 import Link from "next/link";
-
-const productInCart = [initialData.products[0], initialData.products[1], initialData.products[2]];
 
 export default function CheackoutPage() {
   return (
