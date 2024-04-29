@@ -1,6 +1,6 @@
+import { ProductsInCartCheckout } from "@/components/checkout/ProductsInCart";
 import { Title } from "@/components/ui/Title";
 import { initialData } from "@/seed/seed";
-import Image from "next/image";
 import Link from "next/link";
 
 const productInCart = [initialData.products[0], initialData.products[1], initialData.products[2]];
@@ -20,27 +20,7 @@ export default function CheackoutPage() {
               </Link>
             </div>
 
-            {productInCart.map((product) => (
-              <div key={product.slug} className="flex gap-2">
-                <figure className="w-1/3 max-w-[100px] bg-green-100 rounded-md overflow-hidden">
-                  <Image
-                    src={`/products/${product.images[0]}`}
-                    width={120}
-                    height={120}
-                    style={{ objectFit: "cover", width: "100%", height: "100%" }}
-                    alt={product.title}
-                    className="rounded-md"
-                    priority
-                  />
-                </figure>
-
-                <article className="w-2/3">
-                  <p>{product.title}</p>
-                  <p>${product.price} x 3</p>
-                  <p className="font-bold">Subtotal: ${product.price * 3}</p>
-                </article>
-              </div>
-            ))}
+            <ProductsInCartCheckout />
           </div>
 
           <div className="flex flex-col bg-white shadow-md rounded-md p-4 gap-10">

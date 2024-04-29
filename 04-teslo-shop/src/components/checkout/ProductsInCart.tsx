@@ -1,16 +1,13 @@
 "use client";
-import { QuantitySelector } from "@/components/product/QuantitySelector";
 import { useCartStore } from "@/stores/cart/cart-store";
+import { currencyFormat } from "@/utils/currencyFormat";
 import Image from "next/image";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
-import { SkeletonProdutsInCart } from "./SkeletonProdutsInCart";
+import { SkeletonProdutsInCart } from "../cart/SkeletonProdutsInCart";
 
-export const ProductsInCart = () => {
+export const ProductsInCartCheckout = () => {
   const productInCart = useCartStore((state) => state.cart);
-  const updateProductToCart = useCartStore((state) => state.updateProductToCart);
-  const removeProduct = useCartStore((state) => state.removeProduct);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -42,18 +39,11 @@ export const ProductsInCart = () => {
           </figure>
 
           <article className="w-2/3">
-            <Link className="hover:underline cursor-pointer" href={`/product/${product.slug}`}>
-              <p>{product.title}</p>
-              <p>Size: {product.size}</p>
-            </Link>
-            <p className="font-bold">${product.price}</p>
-            <QuantitySelector
-              quantity={product.quantity}
-              onSelectedQuantity={(quantity) => updateProductToCart(product, quantity)}
-            />
-            <button onClick={() => removeProduct(product)} className="text-red-900 underline">
-              Remove
-            </button>
+            <p>{product.title}</p>
+            <p>
+              Size: {product.size} ({product.quantity})
+            </p>
+            <p className="font-bold">{currencyFormat(product.price * product.quantity)}</p>
           </article>
         </div>
       ))}
