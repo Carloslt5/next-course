@@ -1,9 +1,10 @@
 "use client";
+import { deleteUserAddress } from "@/actions/address/delete-user-address";
 import { setUserAddress } from "@/actions/address/set-user-address";
 import { Country } from "@/interfaces/country.type";
 import { useAddressStore } from "@/stores/address/address-store";
 import clsx from "clsx";
-import { type Session } from "next-auth/react";
+import { Session } from "next-auth";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
@@ -50,7 +51,7 @@ export const AdressForm = ({ countries, session }: AdressFormProps) => {
     if (data.rememberAddress) {
       setUserAddress(rest, session.user.id);
     } else {
-      // todo
+      deleteUserAddress(session.user.id);
     }
   };
 
