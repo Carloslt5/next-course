@@ -49,5 +49,35 @@ export const placeOrder = async (productIds: ProductOrder[], address: Address) =
     },
     { subTotal: 0, tax: 0, total: 0 }
   );
-  console.log("🚀 --------- { subTotal, tax, total }", { subTotal, tax, total });
+
+  // Create Transaction
+  const prismaTX = await prisma.$transaction(async (tx) => {
+    // Update stock product
+    // Create order
+    const order = await tx.order.create({
+      data: {
+        userId: userId,
+        itemsInOrder: itemsInOrder,
+        subTotal: subTotal,
+        tax: tax,
+        total: total,
+
+        OrderItem: {
+          createMany: {
+            data: productIds.map((item) => ({
+              quantity: item.quantity,
+              size: item.size,
+              productId: item.productId,
+              price: products.find((product) => product.id === item.productId)?.price ?? 0,
+            })),
+          },
+        },
+      },
+    });
+    // Create order address
+
+    return {
+      order: order,
+    };
+  });
 };
