@@ -14,6 +14,7 @@ type State = {
   addProductToCart: (product: CartProduct) => void;
   updateProductToCart: (product: CartProduct, quantity: number) => void;
   removeProduct: (product: CartProduct) => void;
+  clearCart: () => void;
 };
 
 export const useCartStore = create<State>()(
@@ -77,6 +78,9 @@ export const useCartStore = create<State>()(
           return item.id !== product.id || item.size !== product.size;
         });
         set({ cart: deletedProductToCart });
+      },
+      clearCart: () => {
+        set({ cart: [] });
       },
     }),
     { name: "shopping-cart" }

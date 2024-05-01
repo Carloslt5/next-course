@@ -5,16 +5,21 @@ import { useAddressStore } from "@/stores/address/address-store";
 import { useCartStore } from "@/stores/cart/cart-store";
 import { currencyFormat } from "@/utils/currencyFormat";
 import clsx from "clsx";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export const PlaceOrder = () => {
+  const router = useRouter();
+
   const address = useAddressStore((state) => state.address);
+  const cart = useCartStore((state) => state.cart);
   const { subTotal, tax, total } = useCartStore((state) => state.getSummaryInfomation());
   const totalItems = useCartStore((state) => state.getTotalItems());
-  const cart = useCartStore((state) => state.cart);
+  const clearCart = useCartStore((state) => state.clearCart);
 
   const [isPlacingOrder, setIsPlacingOrder] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     setLoaded(true);
@@ -31,11 +36,16 @@ export const PlaceOrder = () => {
       quantity: product.quantity,
       size: product.size,
     }));
-    console.log({ address, productsOrder });
 
     const res = await placeOrder(productsOrder, address);
-    console.log("🚀 --------- res", res);
-    setIsPlacingOrder(false);
+    if (!res.status) {
+      setIsPlacingOrder(false);
+      setErrorMessage(res.messagge);
+      return;
+    }
+
+    await clearCart();
+    router.replace(`/orders/${res.order?.id}`);
   };
 
   return (
@@ -73,7 +83,7 @@ export const PlaceOrder = () => {
         </article>
       </div>
       <div>
-        {/* <p className="text-red-500 ">Error creating order</p> */}
+        <p className="text-red-500 mb-5">{errorMessage}</p>
         <button
           // href={"/orders/123"}
           onClick={onPlaceOrder}
