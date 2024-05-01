@@ -1,10 +1,9 @@
 "use client";
 import { deleteUserAddress } from "@/actions/address/delete-user-address";
 import { setUserAddress } from "@/actions/address/set-user-address";
-import { Address } from "@/interfaces/address.type";
+import { UserAddress } from "@/interfaces/address.type";
 import { Country } from "@/interfaces/country.type";
 import { useAddressStore } from "@/stores/address/address-store";
-import { useCartStore } from "@/stores/cart/cart-store";
 import clsx from "clsx";
 import { Session } from "next-auth";
 import { useRouter } from "next/navigation";
@@ -26,10 +25,11 @@ type FormInputs = {
 type AdressFormProps = {
   countries: Country[];
   session: Session | null;
-  userStoredAddress: Partial<Address>;
+  userStoredAddress: Partial<UserAddress>;
 };
 
 export const AdressForm = ({ countries, session, userStoredAddress }: AdressFormProps) => {
+  const { userId, ...restUserAddress } = userStoredAddress;
   const route = useRouter();
   const {
     register,
@@ -38,7 +38,7 @@ export const AdressForm = ({ countries, session, userStoredAddress }: AdressForm
     reset,
   } = useForm<FormInputs>({
     defaultValues: {
-      ...(userStoredAddress as any),
+      ...restUserAddress,
       rememberAddress: false,
     },
   });

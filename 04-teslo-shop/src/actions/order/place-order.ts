@@ -74,10 +74,20 @@ export const placeOrder = async (productIds: ProductOrder[], address: Address) =
         },
       },
     });
+
     // Create order address
+    const { country, ...restAddress } = address;
+    const orderAddress = await tx.orderAddress.create({
+      data: {
+        ...restAddress,
+        countryId: country,
+        orderId: order.id,
+      },
+    });
 
     return {
       order: order,
+      orderAddress: orderAddress,
     };
   });
 };
