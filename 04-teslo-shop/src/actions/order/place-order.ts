@@ -18,7 +18,7 @@ export const placeOrder = async (productIds: ProductOrder[], address: Address) =
   if (!userId) {
     return {
       status: false,
-      messagge: "Not session",
+      messagge: NOT_USER_SESSION,
     };
   }
 

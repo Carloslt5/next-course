@@ -85,7 +85,6 @@ export const PlaceOrder = () => {
       <div>
         <p className="text-red-500 mb-5">{errorMessage}</p>
         <button
-          // href={"/orders/123"}
           onClick={onPlaceOrder}
           className={clsx({
             "btn-primary": !isPlacingOrder,

@@ -8,7 +8,7 @@ export const getOrderByID = async (id: string) => {
   if (!session) {
     return {
       status: false,
-      message: "Need to authenticate",
+      message: NOT_USER_SESSION,
     };
   }
 
