@@ -104,7 +104,7 @@ export default async function OrderPage({ params }: OrderPageProps) {
                 </span>
               </article>
             </div>
-            <PaypalButton />
+            <PaypalButton orderId={order!.id} amount={order!.total} />
           </div>
         </div>
       </div>

@@ -1,9 +1,15 @@
 "use client";
 
+import { setTransactionId } from "@/actions/payments/set-transaction.id";
 import { CreateOrderActions, CreateOrderData } from "@paypal/paypal-js";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 
-export const PaypalButton = () => {
+interface PaypalButtonProps {
+  orderId: string;
+  amount: number;
+}
+
+export const PaypalButton = ({ orderId, amount }: PaypalButtonProps) => {
   const [{ isPending }] = usePayPalScriptReducer();
 
   if (isPending) {
@@ -18,13 +24,17 @@ export const PaypalButton = () => {
       purchase_units: [
         {
           amount: {
-            value: `100.00`,
+            value: `${amount}`,
           },
         },
       ],
     });
 
-    console.log("🚀 --------- transactionId", transactionId);
+    const { status } = await setTransactionId(orderId, transactionId);
+    if (!status) {
+      throw new Error("Can not update order");
+    }
+
     return transactionId;
   };
 
