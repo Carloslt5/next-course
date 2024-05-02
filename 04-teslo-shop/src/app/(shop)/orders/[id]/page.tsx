@@ -1,4 +1,5 @@
 import { getOrderByID } from "@/actions/order/get-order-by-id";
+import { PaypalButton } from "@/components/paypal/PaypalButton";
 import { Title } from "@/components/ui/Title";
 import { PAID, PENDING_PAYMENT } from "@/constants/OrderStatus.const";
 import { currencyFormat } from "@/utils/currencyFormat";
@@ -103,7 +104,7 @@ export default async function OrderPage({ params }: OrderPageProps) {
                 </span>
               </article>
             </div>
-            <div
+            {/* <div
               className={clsx(
                 "flex gap-2 items-center rounded-lg py-2 px-3 text-xs font-bold text-white mb-2",
                 {
@@ -114,7 +115,8 @@ export default async function OrderPage({ params }: OrderPageProps) {
             >
               <IoCardOutline size={30} />
               <span>{order?.isPaid ? PAID : PENDING_PAYMENT}</span>
-            </div>
+            </div> */}
+            <PaypalButton />
           </div>
         </div>
       </div>
