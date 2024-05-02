@@ -104,18 +104,6 @@ export default async function OrderPage({ params }: OrderPageProps) {
                 </span>
               </article>
             </div>
-            {/* <div
-              className={clsx(
-                "flex gap-2 items-center rounded-lg py-2 px-3 text-xs font-bold text-white mb-2",
-                {
-                  "bg-red-500": !order?.isPaid,
-                  "bg-green-700": order?.isPaid,
-                }
-              )}
-            >
-              <IoCardOutline size={30} />
-              <span>{order?.isPaid ? PAID : PENDING_PAYMENT}</span>
-            </div> */}
             <PaypalButton />
           </div>
         </div>
