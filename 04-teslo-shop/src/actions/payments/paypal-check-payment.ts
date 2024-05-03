@@ -1,6 +1,8 @@
 "use server";
 
 import { PaypalStatusOrderResponse } from "@/interfaces/paypal.type";
+import prisma from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
 
 export const paypalCheckPayment = async (transactionId: string) => {
   const authToken = await getPayPalBearerToken();
@@ -18,15 +20,35 @@ export const paypalCheckPayment = async (transactionId: string) => {
       message: "Error verify payment",
     };
   }
+
   const { status, purchase_units } = resp;
-  console.log("🚀 --------- status", { status, purchase_units });
+  const { invoice_id: orderId } = purchase_units[0];
   if (status !== "COMPLETED") {
     return {
       status: false,
       message: "The order has not yet been paid in PayPal",
     };
   }
-  return;
+
+  try {
+    console.log({ status, purchase_units });
+    await prisma.order.update({
+      where: { id: orderId },
+      data: {
+        isPaid: true,
+        updatedAt: new Date(),
+      },
+    });
+  } catch (error) {
+    return {
+      status: false,
+      message: "Error in payment",
+    };
+  }
+  revalidatePath(`/orders/${orderId}`);
+  return {
+    status: true,
+  };
 };
 
 // Generate Oauth Token from Paypal
@@ -50,9 +72,10 @@ const getPayPalBearerToken = async (): Promise<string | null> => {
   };
 
   try {
-    const response = await fetch(process.env.PAYPAL_OAUTH_URL ?? "", requestOptions).then(
-      (response) => response.json()
-    );
+    const response = await fetch(process.env.PAYPAL_OAUTH_URL ?? "", {
+      ...requestOptions,
+      cache: "no-store",
+    }).then((response) => response.json());
     return response.access_token;
   } catch (error) {
     console.log(error);
@@ -74,10 +97,10 @@ const verifyPaypalPayment = async (
   };
 
   try {
-    const response = await fetch(
-      `${process.env.PAYPAL_ORDERS_URL}/${transactionId}`,
-      requestOptions
-    ).then((response) => response.json());
+    const response = await fetch(`${process.env.PAYPAL_ORDERS_URL}/${transactionId}`, {
+      ...requestOptions,
+      cache: "no-store",
+    }).then((response) => response.json());
     return response;
   } catch (error) {
     console.log(error);
