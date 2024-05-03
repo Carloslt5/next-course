@@ -1,7 +1,13 @@
 "use client";
 
+import { paypalCheckPayment } from "@/actions/payments/paypal-check-payment";
 import { setTransactionId } from "@/actions/payments/set-transaction.id";
-import { CreateOrderActions, CreateOrderData } from "@paypal/paypal-js";
+import {
+  CreateOrderActions,
+  CreateOrderData,
+  OnApproveActions,
+  OnApproveData,
+} from "@paypal/paypal-js";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 
 interface PaypalButtonProps {
@@ -39,7 +45,13 @@ export const PaypalButton = ({ orderId, amount }: PaypalButtonProps) => {
     return transactionId;
   };
 
-  return <PayPalButtons createOrder={createOrder} />;
+  const onApprove = async (data: OnApproveData, actions: OnApproveActions) => {
+    const details = await actions.order?.capture();
+    if (!details) return;
+    await paypalCheckPayment(details.id);
+  };
+
+  return <PayPalButtons createOrder={createOrder} onApprove={onApprove} />;
 };
 
 const SkeletonPaypalButton = () => {
