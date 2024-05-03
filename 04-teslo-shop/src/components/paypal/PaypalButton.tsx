@@ -10,6 +10,7 @@ interface PaypalButtonProps {
 }
 
 export const PaypalButton = ({ orderId, amount }: PaypalButtonProps) => {
+  const roundedAmount = Math.round(amount * 100) / 100;
   const [{ isPending }] = usePayPalScriptReducer();
 
   if (isPending) {
@@ -24,7 +25,7 @@ export const PaypalButton = ({ orderId, amount }: PaypalButtonProps) => {
       purchase_units: [
         {
           amount: {
-            value: `${amount}`,
+            value: `${roundedAmount}`,
           },
         },
       ],
