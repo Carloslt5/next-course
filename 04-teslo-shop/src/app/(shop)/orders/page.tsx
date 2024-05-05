@@ -1,4 +1,4 @@
-import { getOrderByUser } from "@/actions/order/get-order-by-user";
+import { getPaginatedOrders } from "@/actions/order/get-paginated-orders";
 import { Title } from "@/components/ui/Title";
 import { PAID, PENDING_PAYMENT } from "@/constants/OrderStatus.const";
 import Link from "next/link";
@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import { IoCardOutline } from "react-icons/io5";
 
 export default async function OrdersPage() {
-  const { status, orders } = await getOrderByUser();
+  const { status, orders } = await getPaginatedOrders();
   if (!status) {
     redirect("/auth/login");
   }

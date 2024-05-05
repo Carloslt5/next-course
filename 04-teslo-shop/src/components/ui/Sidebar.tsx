@@ -1,6 +1,8 @@
 "use client";
 
 import { logout } from "@/actions/auth/logout";
+import { useAddressStore } from "@/stores/address/address-store";
+import { useCartStore } from "@/stores/cart/cart-store";
 import { useMenuStore } from "@/stores/menu-ui/menu-ui";
 import clsx from "clsx";
 import { Session } from "next-auth";
@@ -23,6 +25,8 @@ type SidebarProps = {
 export const Sidebar = ({ session }: SidebarProps) => {
   const isSideMenuOpen = useMenuStore((state) => state.isSideMenuOpen);
   const closeMenu = useMenuStore((state) => state.closeSideMenu);
+  const clearCart = useCartStore((state) => state.clearCart);
+  const clearAddress = useAddressStore((state) => state.clearAddress);
   const isAutenticated = !!session?.user;
   const isAdmin = session?.user.role === "admin";
 
@@ -81,7 +85,11 @@ export const Sidebar = ({ session }: SidebarProps) => {
 
         {isAutenticated ? (
           <button
-            onClick={() => logout()}
+            onClick={() => {
+              logout();
+              clearCart();
+              clearAddress();
+            }}
             className="flex w-full items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
           >
             <IoLogOutOutline size={30} /> <span className="ml-3 text-xl">Log out</span>
@@ -108,7 +116,8 @@ export const Sidebar = ({ session }: SidebarProps) => {
             </Link>
 
             <Link
-              href={"/"}
+              href={"/orders"}
+              onClick={closeMenu}
               className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
             >
               <IoTicketOutline size={30} /> <span className="ml-3 text-xl">Orders</span>

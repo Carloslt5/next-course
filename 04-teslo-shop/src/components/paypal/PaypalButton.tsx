@@ -52,7 +52,11 @@ export const PaypalButton = ({ orderId, amount }: PaypalButtonProps) => {
     await paypalCheckPayment(details.id);
   };
 
-  return <PayPalButtons createOrder={createOrder} onApprove={onApprove} />;
+  return (
+    <div className="relative z-0">
+      <PayPalButtons createOrder={createOrder} onApprove={onApprove} />
+    </div>
+  );
 };
 
 const SkeletonPaypalButton = () => {

@@ -13,6 +13,7 @@ interface State {
     phone: string;
   };
   setAddress: (address: State["address"]) => void;
+  clearAddress: () => void;
 }
 
 export const useAddressStore = create<State>()(
@@ -30,6 +31,20 @@ export const useAddressStore = create<State>()(
       },
       setAddress: (address) => {
         set({ address });
+      },
+      clearAddress: () => {
+        set({
+          address: {
+            name: "",
+            lastName: "",
+            address: "",
+            address2: "",
+            zipCode: "",
+            city: "",
+            country: "",
+            phone: "",
+          },
+        });
       },
     }),
     { name: "address-store" }
