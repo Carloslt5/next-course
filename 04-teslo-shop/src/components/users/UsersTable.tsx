@@ -11,13 +11,13 @@ export const UsersTable = ({ users }: UsersTableProps) => {
     <table className="min-w-full text-gray-900">
       <thead className="bg-gray-200 border-b">
         <tr>
-          <th scope="col" className="text-sm font-medium  px-6 py-4 text-left">
+          <th scope="col" className="text-sm font-medium px-6 py-4 text-left">
             Email
           </th>
-          <th scope="col" className="text-sm font-medium  px-6 py-4 text-left">
+          <th scope="col" className="text-sm font-medium px-6 py-4 text-left">
             Name
           </th>
-          <th scope="col" className="text-sm font-medium  px-6 py-4 text-left">
+          <th scope="col" className="text-sm font-medium px-6 py-4 text-left">
             Role
           </th>
         </tr>
@@ -30,7 +30,7 @@ export const UsersTable = ({ users }: UsersTableProps) => {
           >
             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">{user.email}</td>
             <td className="text-sm  font-light px-6 py-4 whitespace-nowrap">{user.name}</td>
-            <td className="flex items-center text-sm   font-light px-6 py-4 whitespace-nowrap">
+            <td className="flex items-center text-sm font-light px-6 py-4 whitespace-nowrap">
               <select
                 value={user.role}
                 onChange={(e) => e.target.value}
