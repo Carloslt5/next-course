@@ -5,10 +5,10 @@ export interface User {
   image?: string | null;
   name: string;
   password: string;
-  role: UserRole;
+  role: Role;
 }
 
-export enum UserRole {
+export enum Role {
   ADMIN = "admin",
   USER = "user",
 }

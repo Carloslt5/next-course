@@ -1,11 +1,11 @@
 "use server";
 
 import { auth } from "@/auth";
-import { UserRole } from "@/interfaces/user.types";
+import { Role } from "@/interfaces/user.types";
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
-export const changeUserRole = async (userID: string, role: string) => {
+export const changeRole = async (userID: string, role: string) => {
   const session = await auth();
   if (session?.user.role !== "admin") {
     return {
@@ -15,7 +15,7 @@ export const changeUserRole = async (userID: string, role: string) => {
   }
 
   try {
-    const newRole = role === UserRole.ADMIN ? UserRole.ADMIN : UserRole.USER;
+    const newRole = role === Role.ADMIN ? Role.ADMIN : Role.USER;
     await prisma.user.update({
       where: {
         id: userID,

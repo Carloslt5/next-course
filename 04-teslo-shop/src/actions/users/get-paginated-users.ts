@@ -1,6 +1,7 @@
 "use server";
 
 import { auth } from "@/auth";
+import { Role } from "@/interfaces/user.types";
 import prisma from "@/lib/prisma";
 
 export const getPaginatedUsers = async () => {
@@ -17,10 +18,30 @@ export const getPaginatedUsers = async () => {
       name: "desc",
     },
   });
-  console.log("🚀 --------- users", users);
+
+  const mappedUsers = users.map((user) => ({
+    id: user.id,
+    email: user.email,
+    emailVerified: user.emailVerified,
+    image: user.image,
+    name: user.name,
+    password: user.password,
+    role: mapUserRole(user.role),
+  }));
 
   return {
     status: true,
-    users: users,
+    users: mappedUsers,
   };
+};
+
+const mapUserRole = (role: string): Role => {
+  switch (role) {
+    case "admin":
+      return Role.ADMIN;
+    case "user":
+      return Role.USER;
+    default:
+      return Role.USER;
+  }
 };

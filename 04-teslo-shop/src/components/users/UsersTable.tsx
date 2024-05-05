@@ -1,7 +1,7 @@
 "use client";
 
-import { changeUserRole } from "@/actions/users/change-user-role";
-import { User, UserRole } from "@/interfaces/user.types";
+import { changeRole } from "@/actions/users/change-user-role";
+import { Role, User } from "@/interfaces/user.types";
 
 type UsersTableProps = {
   users: User[];
@@ -34,11 +34,11 @@ export const UsersTable = ({ users }: UsersTableProps) => {
             <td className="flex items-center text-sm font-light px-6 py-4 whitespace-nowrap">
               <select
                 value={user.role}
-                onChange={(e) => changeUserRole(user.id, e.target.value)}
+                onChange={(e) => changeRole(user.id, e.target.value)}
                 className="text-sm w-full p-2"
               >
-                <option value={UserRole.ADMIN}>Admin</option>
-                <option value={UserRole.USER}>User</option>
+                <option value={Role.ADMIN}>Admin</option>
+                <option value={Role.USER}>User</option>
               </select>
             </td>
           </tr>
