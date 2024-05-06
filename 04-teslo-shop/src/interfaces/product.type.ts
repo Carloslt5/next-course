@@ -1,5 +1,5 @@
 export interface Product {
-  ProductImage: ProductImage[];
+  ProductImage?: ProductImage[];
   id: string;
   description: string;
   images: string[];
@@ -25,6 +25,7 @@ export interface CartProduct {
 
 export interface ProductImage {
   url: string;
+  id: number;
 }
 
 export type Gender = "men" | "women" | "kid" | "unisex";

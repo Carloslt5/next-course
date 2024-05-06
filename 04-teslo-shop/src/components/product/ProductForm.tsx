@@ -2,6 +2,7 @@
 
 import { Category } from "@/interfaces/category.type";
 import { Product } from "@/interfaces/product.type";
+import Image from "next/image";
 import { useForm } from "react-hook-form";
 
 interface ProductFormProps {
@@ -25,6 +26,7 @@ interface FormInputs {
 const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 
 export const ProductForm = ({ product, categories }: ProductFormProps) => {
+  console.log("🚀 --------- product", product);
   const {
     register,
     handleSubmit,
@@ -130,7 +132,7 @@ export const ProductForm = ({ product, categories }: ProductFormProps) => {
         {/* As checkboxes */}
         <div className="flex flex-col">
           <span>Sizes</span>
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap mb-2">
             {sizes.map((size) => (
               <div
                 key={size}
@@ -141,14 +143,35 @@ export const ProductForm = ({ product, categories }: ProductFormProps) => {
             ))}
           </div>
 
-          <div className="flex flex-col mb-2">
+          <div className="flex flex-col mb-2 ">
             <span>Photos</span>
             <input
               type="file"
               multiple
-              className="p-2 border rounded-md bg-gray-200"
+              className="p-2 border rounded-md bg-gray-200 mb-6"
               accept="image/png, image/jpeg"
             />
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {product.ProductImage?.map((image) => (
+                <div key={image.id}>
+                  <Image
+                    src={`/products/${image.url}`}
+                    width={300}
+                    height={300}
+                    alt={product.title ?? ""}
+                    className="rounded-t-lg shadow-md"
+                  />
+                  <button
+                    type="button"
+                    className="btn-delete"
+                    onClick={() => console.log(image.id, image.url)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
