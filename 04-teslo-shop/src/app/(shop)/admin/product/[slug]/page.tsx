@@ -1,3 +1,4 @@
+import { getCategories } from "@/actions/category/get-categories";
 import { getProductBySlug } from "@/actions/product/get-product-by-slug";
 import { ProductForm } from "@/components/product/ProductForm";
 import { Title } from "@/components/ui/Title";
@@ -10,7 +11,8 @@ type ProductPageProps = {
 };
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = params;
-  const product = await getProductBySlug(slug);
+
+  const [product, categories] = await Promise.all([getProductBySlug(slug), getCategories()]);
 
   if (!product) {
     redirect("admin/products");
@@ -21,7 +23,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   return (
     <>
       <Title title={title} />
-      <ProductForm product={product} />
+      <ProductForm product={product} categories={categories} />
     </>
   );
 }

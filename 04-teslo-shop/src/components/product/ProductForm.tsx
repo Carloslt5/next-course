@@ -1,17 +1,18 @@
 "use client";
 
+import { Category } from "@/interfaces/category.type";
 import { Product } from "@/interfaces/product.type";
 
 interface ProductFormProps {
   product: Product;
+  categories: Category[];
 }
 
 const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 
-export const ProductForm = ({ product }: ProductFormProps) => {
+export const ProductForm = ({ product, categories }: ProductFormProps) => {
   return (
     <form className="grid px-5 mb-16 grid-cols-1 sm:px-0 sm:grid-cols-2 gap-3">
-      {/* Textos */}
       <div className="w-full">
         <div className="flex flex-col mb-2">
           <span>Title</span>
@@ -53,6 +54,11 @@ export const ProductForm = ({ product }: ProductFormProps) => {
           <span>Category</span>
           <select className="p-2 border rounded-md bg-gray-200">
             <option value="">[Seleccione]</option>
+            {categories.map((categorie) => (
+              <option value={categorie.id} key={categorie.id}>
+                {categorie.name}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -66,7 +72,6 @@ export const ProductForm = ({ product }: ProductFormProps) => {
           <span>Sizes</span>
           <div className="flex flex-wrap">
             {sizes.map((size) => (
-              // bg-blue-500 text-white <--- si está seleccionado
               <div
                 key={size}
                 className="flex  items-center justify-center w-10 h-10 mr-2 border rounded-md"
