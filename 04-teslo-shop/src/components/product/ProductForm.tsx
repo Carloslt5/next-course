@@ -165,10 +165,7 @@ export const ProductForm = ({ product, categories }: ProductFormProps) => {
             ))}
           </select>
         </div>
-
-        <button className="btn-primary w-full">Save</button>
       </div>
-
       {/* Selector de tallas y fotos */}
       <div className="w-full">
         <div className="flex flex-col mb-2">
@@ -208,7 +205,7 @@ export const ProductForm = ({ product, categories }: ProductFormProps) => {
               accept="image/png, image/jpeg, image/avif"
             />
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {product.ProductImage?.map((image) => (
                 <div key={image.id}>
                   <ProductImage
@@ -216,7 +213,7 @@ export const ProductForm = ({ product, categories }: ProductFormProps) => {
                     width={300}
                     height={300}
                     alt={product.title ?? ""}
-                    className="rounded-t-lg shadow-md"
+                    className="rounded-t-lg shadow-md w-full"
                   />
                   <button
                     type="button"
@@ -231,6 +228,7 @@ export const ProductForm = ({ product, categories }: ProductFormProps) => {
           </div>
         </div>
       </div>
+      <button className="btn-primary w-full sm:col-span-2 mt-4">Save</button>
     </form>
   );
 };
