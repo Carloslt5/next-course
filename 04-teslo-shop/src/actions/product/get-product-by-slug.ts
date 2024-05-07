@@ -17,7 +17,7 @@ export const getProductBySlug = async (slug: string) => {
 
     return {
       ...product,
-      images: product.ProductImage.map((image) => image.url),
+      // images: product.ProductImage.map((image) => image.url),
     };
   } catch (error) {
     throw new Error("Can not get product by slug");

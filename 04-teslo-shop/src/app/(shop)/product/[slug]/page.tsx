@@ -27,7 +27,7 @@ export async function generateMetadata(
     openGraph: {
       title: product?.title ?? "Product not found",
       description: product?.description ?? "",
-      images: [`/products/${product?.images[1]}`],
+      images: [`/products/${product?.ProductImage[1]}`],
     },
   };
 }
@@ -42,12 +42,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-4">
       <div className="col-span-1 md:col-span-2">
         <ProductMobileSlideshow
-          images={product.images}
+          images={product.ProductImage}
           title={product.title}
           className="block md:hidden"
         />
         <ProductSlideshow
-          images={product.images}
+          images={product.ProductImage}
           title={product.title}
           className="hidden md:block"
         />

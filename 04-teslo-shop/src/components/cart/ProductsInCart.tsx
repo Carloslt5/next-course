@@ -1,10 +1,10 @@
 "use client";
 import { QuantitySelector } from "@/components/product/QuantitySelector";
 import { useCartStore } from "@/stores/cart/cart-store";
-import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
+import { ProductImage } from "../ui/ProductImage";
 import { SkeletonProdutsInCart } from "./SkeletonProdutsInCart";
 
 export const ProductsInCart = () => {
@@ -30,8 +30,8 @@ export const ProductsInCart = () => {
       {productInCart.map((product) => (
         <div key={`${product.slug}-${product.size}`} className="flex flex-row gap-2">
           <figure className=" w-1/3 max-w-[100px] bg-white rounded-md overflow-hidden">
-            <Image
-              src={`/products/${product.image}`}
+            <ProductImage
+              src={product.image}
               width={120}
               height={120}
               style={{ objectFit: "cover", width: "100%", height: "100%" }}

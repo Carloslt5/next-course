@@ -1,7 +1,7 @@
 import { Product } from "@/interfaces/product.type";
 import { currencyFormat } from "@/utils/currencyFormat";
-import Image from "next/image";
 import Link from "next/link";
+import { ProductImage } from "../ui/ProductImage";
 
 type ProductsTableProps = {
   products: Product[];
@@ -40,12 +40,11 @@ export const ProductsTable = ({ products }: ProductsTableProps) => {
           >
             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
               <Link href={`/product/${product.slug}`}>
-                <Image
-                  src={`/products/${product.ProductImage[0]?.url}`}
-                  width={80}
-                  height={80}
+                <ProductImage
+                  src={product.ProductImage?.[0]?.url!}
                   alt={product.title}
-                  className="w-20 h-20 object-cover rounded"
+                  height={80}
+                  width={80}
                 />
               </Link>
             </td>

@@ -1,4 +1,5 @@
 "use client";
+import { ProductImage } from "@/interfaces/product.type";
 import Image from "next/image";
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -8,7 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "./Slideshow.css";
 
 type ProductSlideshowProps = {
-  images: string[];
+  images: ProductImage[];
   title: string;
   className?: string;
 };
@@ -27,7 +28,7 @@ export const ProductMobileSlideshow = ({ images, title, className }: ProductSlid
         className="mySwiper2"
       >
         {images.map((image) => (
-          <SwiperSlide key={image}>
+          <SwiperSlide key={image.id}>
             <Image
               src={`/products/${image}`}
               alt={title}

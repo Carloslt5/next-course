@@ -1,5 +1,6 @@
 "use client";
-import Image from "next/image";
+import { ProductImage } from "@/components/ui/ProductImage";
+import { type ProductImage as ProductImageType } from "@/interfaces/product.type";
 import { CSSProperties, useState } from "react";
 import { Swiper as SwiperObject } from "swiper";
 import "swiper/css";
@@ -11,7 +12,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "./Slideshow.css";
 
 type ProductSlideshowProps = {
-  images: string[];
+  images: ProductImageType[];
   title: string;
   className?: string;
 };
@@ -36,9 +37,9 @@ export const ProductSlideshow = ({ images, title, className }: ProductSlideshowP
         className="mySwiper2"
       >
         {images.map((image) => (
-          <SwiperSlide key={image}>
-            <Image
-              src={`/products/${image}`}
+          <SwiperSlide key={image.id}>
+            <ProductImage
+              src={image.url}
               alt={title}
               className="rounded-md"
               height={800}
@@ -59,13 +60,13 @@ export const ProductSlideshow = ({ images, title, className }: ProductSlideshowP
         className="mySwiper"
       >
         {images.map((image) => (
-          <SwiperSlide key={image}>
-            <Image
-              src={`/products/${image}`}
+          <SwiperSlide key={image.id}>
+            <ProductImage
+              src={image.url}
               alt={title}
-              className="rounded-md "
-              height={300}
-              width={300}
+              className="rounded-md"
+              height={800}
+              width={1024}
               priority
             />
           </SwiperSlide>
