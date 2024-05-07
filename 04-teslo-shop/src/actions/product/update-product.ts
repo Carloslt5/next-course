@@ -2,6 +2,7 @@
 
 import prisma from "@/lib/prisma";
 import { Gender, Product, Size } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 const productSchema = z.object({
@@ -37,43 +38,56 @@ export const updateProduct = async (formData: FormData) => {
 
   const { id, ...rest } = product;
 
-  const prismaTX = await prisma.$transaction(async (tx) => {
-    let product: Product;
-    const tagsArray = rest.tags.split(",").map((tag) => tag.trim().toLowerCase());
+  try {
+    const prismaTX = await prisma.$transaction(async (tx) => {
+      let product: Product;
+      const tagsArray = rest.tags.split(",").map((tag) => tag.trim().toLowerCase());
 
-    if (id) {
-      // update
-      product = await prisma.product.update({
-        where: { id },
-        data: {
-          ...rest,
-          sizes: {
-            set: rest.sizes as Size[],
+      if (id) {
+        // update
+        product = await prisma.product.update({
+          where: { id },
+          data: {
+            ...rest,
+            sizes: {
+              set: rest.sizes as Size[],
+            },
+            tags: {
+              set: tagsArray,
+            },
           },
-          tags: {
-            set: tagsArray,
+        });
+      } else {
+        // create
+        product = await prisma.product.create({
+          data: {
+            ...rest,
+            sizes: {
+              set: rest.sizes as Size[],
+            },
+            tags: {
+              set: tagsArray,
+            },
           },
-        },
-      });
-    } else {
-      // create
-      product = await prisma.product.create({
-        data: {
-          ...rest,
-          sizes: {
-            set: rest.sizes as Size[],
-          },
-          tags: {
-            set: tagsArray,
-          },
-        },
-      });
-    }
-    return { product };
-  });
-  console.log({ updateproduct: product });
+        });
+      }
 
-  return {
-    status: true,
-  };
+      return { product };
+    });
+
+    revalidatePath("/admin/products");
+    revalidatePath(`/admin/product/${product.slug}`);
+    revalidatePath(`/products/${product.slug}`);
+
+    return {
+      status: true,
+      updatedProduct: prismaTX.product,
+    };
+  } catch (error) {
+    console.log("🚀 --------- error", error);
+    return {
+      status: false,
+      product: `Can not updata/ create product`,
+    };
+  }
 };
