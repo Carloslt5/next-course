@@ -4,9 +4,9 @@ import { updateProduct } from "@/actions/product/update-product";
 import { Category } from "@/interfaces/category.type";
 import { Product } from "@/interfaces/product.type";
 import clsx from "clsx";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { ProductImage } from "../ui/ProductImage";
 
 interface ProductFormProps {
   product: Partial<Product>;
@@ -212,8 +212,8 @@ export const ProductForm = ({ product, categories }: ProductFormProps) => {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {product.ProductImage?.map((image) => (
                 <div key={image.id}>
-                  <Image
-                    src={`/products/${image.url}`}
+                  <ProductImage
+                    src={image.url}
                     width={300}
                     height={300}
                     alt={product.title ?? ""}
