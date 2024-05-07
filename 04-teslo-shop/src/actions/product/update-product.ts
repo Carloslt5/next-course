@@ -1,13 +1,11 @@
 "use server";
 
 import { CLOUDINARY_FOLDER } from "@/constants/CloudinaryFolder.const";
+import { cloudinaryInstance } from "@/lib/cloudinary";
 import prisma from "@/lib/prisma";
 import { Gender, Product, Size } from "@prisma/client";
-import { v2 as cloudinary } from "cloudinary";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-
-cloudinary.config(process.env.CLOUDINARY_URL ?? "");
 
 const productSchema = z.object({
   id: z.string().uuid().optional().nullable(),
@@ -117,7 +115,7 @@ const uploadImages = async (images: File[]) => {
         const buffer = await image.arrayBuffer();
         const base64Image = Buffer.from(buffer).toString("base64");
 
-        return cloudinary.uploader
+        return cloudinaryInstance.uploader
           .upload(`data:image/png;base64,${base64Image}`, { folder: `${CLOUDINARY_FOLDER}` })
           .then((r) => r.secure_url);
       } catch (error) {

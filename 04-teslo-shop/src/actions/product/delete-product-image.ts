@@ -1,10 +1,9 @@
 "use server";
 
 import { CLOUDINARY_FOLDER } from "@/constants/CloudinaryFolder.const";
+import { cloudinaryInstance } from "@/lib/cloudinary";
 import prisma from "@/lib/prisma";
-import { v2 as cloudinary } from "cloudinary";
 import { revalidatePath } from "next/cache";
-cloudinary.config(process.env.CLOUDINARY_URL ?? "");
 
 export const deleteProductImage = async (imageId: number, imageUrl: string) => {
   if (!imageUrl.startsWith("http")) {
@@ -18,7 +17,7 @@ export const deleteProductImage = async (imageId: number, imageUrl: string) => {
   console.log("🚀 --------- imageName", imageName);
 
   try {
-    await cloudinary.uploader.destroy(`${CLOUDINARY_FOLDER}/${imageName}`);
+    await cloudinaryInstance.uploader.destroy(`${CLOUDINARY_FOLDER}/${imageName}`);
     const deletedImage = await prisma.productImage.delete({
       where: {
         id: imageId,
