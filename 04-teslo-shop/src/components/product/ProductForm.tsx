@@ -1,5 +1,6 @@
 "use client";
 
+import { deleteProductImage } from "@/actions/product/delete-product-image";
 import { updateProduct } from "@/actions/product/update-product";
 import { Category } from "@/interfaces/category.type";
 import { Product } from "@/interfaces/product.type";
@@ -55,8 +56,6 @@ export const ProductForm = ({ product, categories }: ProductFormProps) => {
   };
 
   const onSubmit = async (data: FormInputs) => {
-    console.log("🚀 --------- data", data);
-
     const formData = new FormData();
     const { images, ...productToSave } = data;
 
@@ -222,7 +221,7 @@ export const ProductForm = ({ product, categories }: ProductFormProps) => {
                   <button
                     type="button"
                     className="btn-delete"
-                    onClick={() => console.log(image.id, image.url)}
+                    onClick={() => deleteProductImage(image.id, image.url)}
                   >
                     Delete
                   </button>

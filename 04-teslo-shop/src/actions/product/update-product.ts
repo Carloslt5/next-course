@@ -1,5 +1,6 @@
 "use server";
 
+import { CLOUDINARY_FOLDER } from "@/constants/CloudinaryFolder.const";
 import prisma from "@/lib/prisma";
 import { Gender, Product, Size } from "@prisma/client";
 import { v2 as cloudinary } from "cloudinary";
@@ -117,7 +118,7 @@ const uploadImages = async (images: File[]) => {
         const base64Image = Buffer.from(buffer).toString("base64");
 
         return cloudinary.uploader
-          .upload(`data:image/png;base64,${base64Image}`, { folder: "teslo-shop" })
+          .upload(`data:image/png;base64,${base64Image}`, { folder: `${CLOUDINARY_FOLDER}` })
           .then((r) => r.secure_url);
       } catch (error) {
         console.log(error);
