@@ -6,6 +6,7 @@ import { Category } from "@/interfaces/category.type";
 import { Product } from "@/interfaces/product.type";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ProductImage } from "../ui/ProductImage";
 
@@ -30,6 +31,7 @@ interface FormInputs {
 const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 
 export const ProductForm = ({ product, categories }: ProductFormProps) => {
+  const [saving, setSaving] = useState(false);
   const router = useRouter();
   const {
     register,
@@ -56,6 +58,7 @@ export const ProductForm = ({ product, categories }: ProductFormProps) => {
   };
 
   const onSubmit = async (data: FormInputs) => {
+    setSaving(true);
     const formData = new FormData();
     const { images, ...productToSave } = data;
 
@@ -84,6 +87,7 @@ export const ProductForm = ({ product, categories }: ProductFormProps) => {
       return;
     }
     router.replace(`/admin/product/${updatedProduct?.slug}`);
+    setSaving(false);
   };
 
   return (
@@ -228,7 +232,15 @@ export const ProductForm = ({ product, categories }: ProductFormProps) => {
           </div>
         </div>
       </div>
-      <button className="btn-primary w-full sm:col-span-2 mt-4">Save</button>
+      <button
+        className={clsx("w-full sm:col-span-2 mt-4", {
+          "btn-primary": !saving,
+          "btn-disable": saving,
+        })}
+        disabled={saving}
+      >
+        {saving ? "Saving product" : "Save"}
+      </button>
     </form>
   );
 };
