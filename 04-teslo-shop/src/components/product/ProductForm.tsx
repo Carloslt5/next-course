@@ -8,7 +8,7 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 
 interface ProductFormProps {
-  product: Product;
+  product: Partial<Product>;
   categories: Category[];
 }
 
@@ -28,7 +28,6 @@ interface FormInputs {
 const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 
 export const ProductForm = ({ product, categories }: ProductFormProps) => {
-  console.log("🚀 --------- product", product);
   const {
     register,
     handleSubmit,
@@ -39,7 +38,7 @@ export const ProductForm = ({ product, categories }: ProductFormProps) => {
   } = useForm<FormInputs>({
     defaultValues: {
       ...product,
-      tags: product.tags.join(", "),
+      tags: product.tags?.join(", "),
       sizes: product.sizes ?? [],
       // todo images
     },
@@ -59,7 +58,9 @@ export const ProductForm = ({ product, categories }: ProductFormProps) => {
     const formData = new FormData();
     const { ...productToSave } = data;
 
-    formData.append("id", product.id ?? "");
+    if (product.id) {
+      formData.append("id", product.id ?? "");
+    }
     formData.append("description", productToSave.description);
     formData.append("inStock", productToSave.inStock.toString());
     formData.append("price", productToSave.price.toString());
@@ -159,6 +160,15 @@ export const ProductForm = ({ product, categories }: ProductFormProps) => {
 
       {/* Selector de tallas y fotos */}
       <div className="w-full">
+        <div className="flex flex-col mb-2">
+          <span>Stock</span>
+          <input
+            type="number"
+            className="p-2 border rounded-md bg-gray-200"
+            {...register("inStock", { required: true, min: 0 })}
+          />
+        </div>
+
         {/* As checkboxes */}
         <div className="flex flex-col">
           <span>Sizes</span>

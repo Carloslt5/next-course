@@ -2,7 +2,7 @@ export interface Product {
   ProductImage?: ProductImage[];
   id: string;
   description: string;
-  images: string[];
+  images?: string[];
   inStock: number;
   price: number;
   sizes: Size[];
@@ -28,14 +28,6 @@ export interface ProductImage {
   id: number;
 }
 
-// export type Gender = "men" | "women" | "kid" | "unisex";
-
-export enum Gender {
-  Men = "men",
-  Women = "women",
-  Kid = "kid",
-  Unisex = "unisex",
-}
-
+export type Gender = "men" | "women" | "kid" | "unisex";
 export type Size = "XS" | "S" | "M" | "L" | "XL" | "XXL" | "XXXL";
 export type Type = "shirts" | "pants" | "hoodies" | "hats";
