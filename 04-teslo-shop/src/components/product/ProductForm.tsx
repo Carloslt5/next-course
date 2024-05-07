@@ -1,5 +1,6 @@
 "use client";
 
+import { updateProduct } from "@/actions/product/update-product";
 import { Category } from "@/interfaces/category.type";
 import { Product } from "@/interfaces/product.type";
 import clsx from "clsx";
@@ -52,8 +53,25 @@ export const ProductForm = ({ product, categories }: ProductFormProps) => {
     setValue("sizes", Array.from(sizes));
   };
 
-  const onSubmit = (data: FormInputs) => {
+  const onSubmit = async (data: FormInputs) => {
     console.log("🚀 --------- data", data);
+
+    const formData = new FormData();
+    const { ...productToSave } = data;
+
+    formData.append("id", product.id ?? "");
+    formData.append("description", productToSave.description);
+    formData.append("inStock", productToSave.inStock.toString());
+    formData.append("price", productToSave.price.toString());
+    formData.append("sizes", productToSave.sizes.toString());
+    formData.append("slug", productToSave.slug);
+    formData.append("tags", productToSave.tags);
+    formData.append("title", productToSave.title);
+    formData.append("gender", productToSave.gender);
+    formData.append("categoryId", productToSave.categoryId);
+
+    const res = await updateProduct(formData);
+    console.log("🚀 --------- res", res);
   };
 
   return (

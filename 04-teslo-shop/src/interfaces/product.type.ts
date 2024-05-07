@@ -28,6 +28,14 @@ export interface ProductImage {
   id: number;
 }
 
-export type Gender = "men" | "women" | "kid" | "unisex";
+// export type Gender = "men" | "women" | "kid" | "unisex";
+
+export enum Gender {
+  Men = "men",
+  Women = "women",
+  Kid = "kid",
+  Unisex = "unisex",
+}
+
 export type Size = "XS" | "S" | "M" | "L" | "XL" | "XXL" | "XXXL";
 export type Type = "shirts" | "pants" | "hoodies" | "hats";
