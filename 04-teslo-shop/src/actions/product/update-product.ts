@@ -72,6 +72,10 @@ export const updateProduct = async (formData: FormData) => {
         });
       }
 
+      if (formData.getAll("images")) {
+        console.log(formData.getAll("images"));
+      }
+
       return { product };
     });
 

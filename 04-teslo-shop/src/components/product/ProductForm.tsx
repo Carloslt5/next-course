@@ -23,7 +23,7 @@ interface FormInputs {
   title: string;
   gender: "men" | "women" | "kid" | "unisex";
   categoryId: string;
-  // todo images
+  images?: FileList;
 }
 
 const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
@@ -42,7 +42,7 @@ export const ProductForm = ({ product, categories }: ProductFormProps) => {
       ...product,
       tags: product.tags?.join(", "),
       sizes: product.sizes ?? [],
-      // todo images
+      images: undefined,
     },
   });
 
@@ -58,7 +58,7 @@ export const ProductForm = ({ product, categories }: ProductFormProps) => {
     console.log("🚀 --------- data", data);
 
     const formData = new FormData();
-    const { ...productToSave } = data;
+    const { images, ...productToSave } = data;
 
     if (product.id) {
       formData.append("id", product.id ?? "");
@@ -72,6 +72,12 @@ export const ProductForm = ({ product, categories }: ProductFormProps) => {
     formData.append("title", productToSave.title);
     formData.append("gender", productToSave.gender);
     formData.append("categoryId", productToSave.categoryId);
+
+    if (images) {
+      for (let i = 0; i < images.length; i++) {
+        formData.append("images", images[i]);
+      }
+    }
 
     const { status, updatedProduct } = await updateProduct(formData);
     if (!status) {
@@ -197,9 +203,10 @@ export const ProductForm = ({ product, categories }: ProductFormProps) => {
             <span>Photos</span>
             <input
               type="file"
+              {...register("images")}
               multiple
               className="p-2 border rounded-md bg-gray-200 mb-6"
-              accept="image/png, image/jpeg"
+              accept="image/png, image/jpeg, image/avif"
             />
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
